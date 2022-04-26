@@ -19,7 +19,7 @@ def input_poz(n, A): #функция ввода и проверки данных
         else:
             print('Ошибка! Некорректные данные')
 
-def transpouse(mat): #трансопорирование матрицы для проверки столбцов.
+def transpouse(mat): #трансопорирование матрицы для проверки столбцов...
     matrix = []
     for i in range(len(mat[0])):
         matrix.append(list())
