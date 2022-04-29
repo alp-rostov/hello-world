@@ -46,12 +46,13 @@ while True:
     A[b[0]][b[1]]=sim
     B = transpouse ( A )
     C = [A[0][0], A[1][1], A[2][2]]
-
+    D = [A[2][0], A[1][1], A[0][2]]
     stroka=A[b[0]].count(sim)
     stolb=B[b[1]].count(sim)
     diagon= C.count(sim)
+    diagon_ = D.count ( sim )
 
-    if 3 in [stroka, stolb, diagon]:
+    if 3 in [stroka, stolb, diagon, diagon_]:
         print(f'Победа игрока №{n}. Игра окончена.')
         pole(A)
         break
