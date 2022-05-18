@@ -1,4 +1,5 @@
 import random
+import time
 from application.exceptions import *
 class Dot:  #объект точки
     def __init__(self, x, y):
@@ -105,13 +106,13 @@ class Board: #объект доска.
                     self.count+=1         #число убитых кораблей
                     self.contur(ship, True) # вокруг убитого корабля ставит точки
                     print("Корабль уничтожен")
-                    return False #
-                else:
+                    return True
+                elif ship.lives>0:
                     print("Корабль ранен")
-                    return True            # ход повторно при ранении корабля
+                    return False            # ход повторно при ранении корабля
         self.field[i.x][i.y]='.'
         print("Мимо")
-        return False
+        return True
 
     def begin(self):                       #метод возвращает пустую матрицу занятых клетокbusy
         self.busy=[]
@@ -165,15 +166,16 @@ class Game:
     def __init__(self, size=6):
         self.size=size
         pl=self.random_board()
+        pl.hid=False
         co = self.random_board()
         co.hid=True
         self.ai=AI(co,pl)             #Объект AI(Player)
         self.us = User ( pl, co )
-    def random_board(self): #  метод гет для объекта доска???
+    def random_board(self): #  метод выполняется когда находится доска
         board=None
         while board is None:
             board=self.random_place()
-            return board
+        return board
     def random_place(self): # метод установки кораблей на доску, возвращает доску с кораблями
         lens=[3,2,2,1,1,1,1]
         board=Board(6)
