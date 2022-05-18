@@ -64,7 +64,7 @@ class Board: #объект доска.
         for i in Ship.dots:  #заполнение матрициы занятых точек коробля и вокруг него i - это точка из списка точек корабля
             for ix, iy in near:
                 cur=Dot(i.x+ix, i.y+iy)
-                if self.out(cur) and cur not in self.busy:
+                if not (self.out(cur)) and cur not in self.busy:
                     if verb:
                         self.field[cur.x][cur.y]="."
                     self.busy.append ( cur )
@@ -157,7 +157,7 @@ class Game:
         co = self.random_board()
         co.hid=True
         self.ai=AI(co,pl)             #Объект AI(Player)
-        self.us = User ( pl, co )
+        self.us = User (pl, co)
     def random_board(self): #  метод гет для объекта доска???
         board=None
         while board is None:

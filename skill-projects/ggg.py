@@ -1,120 +1,80 @@
-# ВЫЧИСЛЕНИЕ СИНУСА по Тейлору
+# # Создадим класс Queue — нужная нам очередь
+# class Queue:
+#     # Конструктор нашего класса, в нём происходит нужная инициализация объекта
+#     def __init__(self, max_size):
+#         self.max_size = max_size  # размер очереди
+#         self.task_num = 0  # будем хранить сквозной номер задачи
 #
-# import math
-# grad=60
-# b=math.radians(grad)
+#         self.tasks = [0 for _ in range ( self.max_size )]  # инициализируем список с нулевыми элементами
+#         self.head = 0  # указатель на начало очереди
+#         self.tail = 0  # указатель на элемент следующий за концом очереди
 #
-# print(grad,' градусов переведем в радианы ->',b)
-# print('Синус по встроенной функции из библиотеки math -->> sin',grad,'=',math.sin(b))
+#     # !!! Класс далее нужно дополнить методами !!!
+#     def is_empty(self):
+#         return self.head == self.tail and self.tasks[self.head] == 0
 #
-# def rec_fibb(i):
-#   B = math.radians(grad)
-#   if i<6:
-#       return B
-#   else:
-#       return rec_fibb(i-4)+B**(i-4)/math.factorial(i-4)-B**(i-6)/math.factorial(i-6)
+#     def size(self):  # получаем размер очереди
+#         if self.is_empty ( ):  # если она пуста
+#             return 0  # возвращаем ноль
+#         elif self.head == self.tail:  # иначе, если очередь не пуста, но указатели совпадают
+#             return self.max_size  # значит, очередь заполнена
+#         elif self.head > self.tail:  # если хвост очереди сместился в начало списка
+#             return self.max_size - self.head + self.tail
+#         else:  # или если хвост стоит правее начала
+#             return self.tail - self.head
 #
-# print('Синус считается с по формуле тейлора с помощью рекурсии: sin',grad,'=', rec_fibb(29))
+#     def add(self):
+#         self.task_num += 1  # увеличиваем порядковый номер задачи
+#         self.tasks[self.tail] = self.task_num  # добавляем его в очередь
+#         print ( f"Задача №{self.tasks[self.tail]} добавлена" )
 #
+#         # увеличиваем указатель на 1 по модулю максимального числа элементов
+#         # для зацикливания очереди в списке
+#         self.tail = (self.tail + 1) % self.max_size
 #
-
-# import math
-# def sinus(x):
+#     def show(self):  # выводим приоритетную задачу
+#         print ( f"Задача №{self.tasks[self.head]} в приоритете" )
 #
-#     for i in range(3,25,4):
-#         x+=-x**i/math.factorial(i)+x**(i+2)/math.factorial(i+2)
-#
-#     return x
-# c=math.sin(b)
-#
-# print('Синус считается в цикле по формуле тэйлора sin=:',grad,'=',sinus(b))
-
-
-# ___________________________________________________________________________________
-import time
-
-
-# def decorator_time(fn):
-#     def wrap(arg):
-#         return round(fn(arg),2)
-#     return wrap
-#
-# @decorator_time
-# def s(x):
-#     return x**3
-#
-# print(s(2.3333))
-
-
-#
-# def sin_rec(x=60):
-#     import math
-#     x = math.radians(x)
-#     for i in range(3, 25, 4):
-#         x+=-x**i/math.factorial(i)+x**(i+2)/math.factorial(i+2)
-#     return x
-
-# in_build_pow = decorator_time(sin_rec)
+#     def do(self):  # выполняем приоритетную задачу
+#         print ( f"Задача №{self.tasks[self.head]} выполнена" )
+#         # после выполнения зануляем элемент по указателю
+#         self.tasks[self.head] = 0
+#         # и циклично перемещаем указатель
+#         self.head = (self.head + 1) % self.max_size
 #
 #
-# print(in_build_pow)
-# # Запустилась функция <function in_build_pow at 0x7f938401b620>
-# # Функция выполнилась. Время: 0.0000021458
-
-# i=0
+# # Используем класс
+# size = int ( input ( "Определите размер очереди: " ) )
+# q = Queue ( size )
+#
 # while True:
-#     a=[]
-#     if  id(i) not in a and i<100:
-#         a.append(id(i))
-#         print(id(i))
-#         i+=1
+#     cmd = input ( "Введите команду:" )
+#     if cmd == "empty":
+#         if q.is_empty ( ):
+#             print ( "Очередь пустая" )
+#         else:
+#             print ( "В очереди есть задачи" )
+#     elif cmd == "size":
+#         print ( "Количество задач в очереди:", q.size ( ) )
+#     elif cmd == "add":
+#         if q.size ( ) != q.max_size:
+#             q.add ( )
+#         else:
+#             print ( "Очередь переполнена" )
+#     elif cmd == "show":
+#         if q.is_empty ( ):
+#             print ( "Очередь пустая" )
+#         else:
+#             q.show ( )
+#     elif cmd == "do":
+#         if q.is_empty ( ):
+#             print ( "Очередь пустая" )
+#         else:
+#             q.do ( )
+#     elif cmd == "exit":
+#         for _ in range ( q.size ( ) ):
+#             q.do ( )
+#         print ( "Очередь пустая. Завершение работы" )
+#         break
 #     else:
-#           break
-
-# a = 0
-# b = 0
-#
-# while id(a) == id(b):
-#     a -= 1
-#     b -= 1
-#
-# print(a)
-#
-# shopping_center = ("Галерея", "Санкт-Петербург", "Лиговский пр., 30", ["H&M", "Zara"])
-# list_id_before = id(shopping_center[-1])
-#
-# shopping_center[-1].append("Uniqlo")
-# list_id_after = id(shopping_center[-1])
-#
-# print(True if list_id_after==list_id_before else False)
-# print(list_id_before)
-# print(list_id_after)
-
-#
-# a = input("Введите первую строку: ")
-# b = input("Введите вторую строку: ")
-#
-# a_set, b_set = set(a), set(b) # используем множественное присваивание
-#
-# a_and_b = a_set.intersection(b_set)
-#
-# print(a_set)
-
-def D(a, b, c):
-    return b ** 2 - 4 * a * c
-
-def quadratic_solve(a, b, c):
-    if D(a, b, c) < 0:
-        return "Нет вещественных корней"
-    elif D(a, b, c) == 0:
-        return -b / (2 * a)
-    else:
-        return (-b - D(a,b,c) ** 0.5) / (2 * a), (-b + D(a, b, c) ** 0.5) / (2 * a)
-#
-# L = list(map(float, input().split()))
-M = {'a': 2,
-     'b': 4,
-     'c': 1}
-
-print(quadratic_solve(M[*a]))
-print(M)
+#         print ( "Введена неверная команда" )
