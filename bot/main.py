@@ -14,7 +14,7 @@ conv_markup.add(*buttons)
 #кнопки количества валюты в конвекторе
 kol_markup = types.ReplyKeyboardMarkup()
 buttons_kol=[]
-for val_ in [10, 50, 100,250,500]:
+for val_ in [300,500,1000,5000,10000]:
     buttons_kol.append(types.KeyboardButton (val_))
 kol_markup.add(*buttons_kol)
 
