@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>{{ flatpage.title }}</title>
-</head>
-<body>
-    <h2>{{ flatpage.title }}</h2>
-    <hr>
-    <h3>Наши контакты:</h3><hr>
-    {{ flatpage.content }}
-    {{ flatpage.content }}
+{% extends 'flatpages/default.html' %}
 
-</body>
-</html>
+{% block title %}
+{{ flatpage.title }}
+{% endblock title %}
+
+{% block content %}
+<table><tr>
+    <td width="400">{{ flatpage.content }}</td>
+    <td width="400">{{ flatpage.content }}</td>
+    </tr></table>
+{% endblock content %}
