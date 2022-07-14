@@ -6,4 +6,152 @@ Category.objects.create(name='Спорт')
 Users.objects.create()
 Users.objects.create()
 
+(venv) PS C:\Users\Asus\projects\skillfactory\NewsPortal1\newsweb> python manage.py shell
+Python 3.10.5 (tags/v3.10.5:f377153, Jun  6 2022, 16:14:13) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from news.models import *
+>>> ddcf
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'ddcf' is not defined
+>>> dcdc
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'dcdc' is not defined
+>>> Category.objects.create(name='Технологии')
+<Category: Category object (6)>
+>>> Users.objects.create_user('alp-rostov')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'Users' is not defined
+>>> User.objects.create_user('alp-rostov')
+<User: alp-rostov>
+>>> User.objects.create_user('zacepka')
+<User: zacepka>
+>>> c=User.objects.get('zacepka')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\query.py", line 482, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\query.py", line 1071, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\query.py", line 1089, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\query.py", line 1096, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\sql\query.py", line 1502, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\sql\query.py", line 1532, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\sql\query.py", line 1374, in build_filter
+    arg, value = filter_expr
+ValueError: too many values to unpack (expected 2)
+>>> c=User.objects.get(username='zacepka')
+>>> c
+<User: zacepka>
+>>> Author.objects.create(full_name='Гоцина Людмила', e_mail='zacepka@mail.ru',id_users_id=c)
+Traceback (most recent call last):
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1988, in get_prep_value
+    return int(value)
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'User'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\query.py", line 514, in create
+    obj.save(force_insert=True, using=self.db)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\base.py", line 806, in save
+    self.save_base(
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\base.py", line 857, in save_base
+    updated = self._save_table(
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\base.py", line 1000, in _save_table
+    results = self._do_insert(
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\base.py", line 1041, in _do_insert
+    return manager._insert(
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\query.py", line 1434, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1620, in execute_sql
+    for sql, params in self.as_sql():
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1547, in as_sql
+    value_rows = [
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1548, in <listcomp>
+    [
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1549, in <listcomp>
+    self.prepare_value(field, self.pre_save_val(field, obj))
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1487, in prepare_value
+    value = field.get_db_prep_save(value, connection=self.connection)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\fields\related.py", line 1126, in get_db_prep_save
+    return self.target_field.get_db_prep_save(value, connection=connection)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\fields\__init__.py", line 910, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\fields\__init__.py", line 2668, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1990, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <User: zacepka>.
+>>> Author.objects.create(full_name='Гоцина Людмила', e_mail='zacepka@mail.ru',id_users_id=c.id)
+<Author: Author object (1)>
+>>> c.id
+2
+>>> Author.objects.create(full_name='Карельский Константин', e_mail='dizi@mail.ru',id_users_id=1)
+<Author: Author object (2)>
+>>> Post.objects.create(head_article='Полузащитник «Спартака» Крал продолжит карьеру в «Шальке»', text_post='«Шальке» объявил о подписании контракта с хавбеком московского «Спартака» Алексом Кралом.')
+Traceback (most recent call last):
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 477, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: news_post.id_author_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\query.py", line 514, in create
+    obj.save(force_insert=True, using=self.db)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\base.py", line 806, in save
+    self.save_base(
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\base.py", line 857, in save_base
+    updated = self._save_table(
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\base.py", line 1000, in _save_table
+    results = self._do_insert(
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\base.py", line 1041, in _do_insert
+    return manager._insert(
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\query.py", line 1434, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1621, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\backends\utils.py", line 103, in execute
+    return super().execute(sql, params)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Asus\projects\skillfactory\NewsPortal1\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 477, in execute
+>>> Post.objects.create(head_article='Скалолазание - олимпийский вид спорта', text_post='«Очень интересный, зрелищный вид спорта, который сочетает в себе не только физическую нагрузку, парой далеко не простую технику, но и в определенных ситуациях требует проявление смекалки, быстрой реакции и большего терпения. Для того чтобы чего-то добиться в скалолазание, как, пожалуй, и в любом другом виде спорта, необходимо не только ежедневно и упорно тренироваться, нужно этим жить. Чтобы стать хорошим скалолазом, мало просто иметь хорошую физическую форму и поставленную технику, нужно научиться продумывать каждое движение перед тем, как его выполнить.',type_post='article', id_author_id=2)
+<Post: Post object (2)>
+>>> Post.objects.create(head_article='Виктория Мешкова - чепионка Европы!', text_post='«Исторического достижения добилась 25 ноября Виктория Мешкова (Свердловская область) на Чемпионате Европы в Москве. В один год она стала сильнейшей на континенте и в боулдеринге, и в трудности.',type_post='article', id_author_id=2)
+<Post: Post object (3)>
+>>>
+
+
+
 
