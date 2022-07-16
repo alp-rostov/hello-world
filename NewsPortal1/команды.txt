@@ -1,0 +1,122 @@
+from news.models import *
+
+Category.objects.create(name='Политика')
+Category.objects.create(name='Культура')
+Category.objects.create(name='Наука')
+Category.objects.create(name='Интернет')
+Category.objects.create(name='Спорт')
+Category.objects.create(name='Технологии')
+Category.objects.create(name='Религия')
+
+
+
+
+
+-добавбление категории и к посту
+post1=Post.objects.get(id=3)
+cat1=Category.objects.get(id=4) 
+post1.catalog.add(cat1)
+
+
+-добавление пользователей
+User.objects.create_user('alp-rostov')
+<User: alp-rostov>
+User.objects.create_user('zacepka')
+<User: zacepka>
+
+-добавление авторов
+c=User.objects.get(username='zacepka')
+Author.objects.create(full_name='Гоцина Людмила', e_mail='zacepka@mail.ru',id_users_id=c.id)
+<Author: Author object (1)>
+>>> c.id
+2
+>>> Author.objects.create(full_name='Карельский Константин', e_mail='dizi@mail.ru',id_users_id=1)
+<Author: Author object (2)>
+
+
+добавление постов
+Post.objects.create(head_article='Полузащитник «Спартака» Крал продолжит карьеру в «Шальке»', text_post='«Шальке» объявил о подписании контракта с хавбеком московского «Спартака» Алексом Кралом.Чешский игрок приостановил контракт с московским клубом и заключил соглашение с командой из Гельзенкирхена до конца сезона-2022/23. 24-летний футболист будет выступать за клуб под 30-м номером.',type_post='article', id_author_id=2)
+<Post: Post object (1)>
+
+
+Post.objects.create(head_article='Скалолазание - олимпийский вид спорта', text_post='«Очень интересный, зрелищный вид спорта, который сочетает в себе не только физическую нагрузку, парой далеко не простую технику, но и в определенных ситуациях требует проявление смекалки, быстрой реакции и большего терпения. Для того чтобы чего-то добиться в скалолазание, как, пожалуй, и в любом другом виде спорта, необходимо не только ежедневно и упорно тренироваться, нужно этим жить. Чтобы стать хорошим скалолазом, мало просто иметь хорошую физическую форму и поставленную технику, нужно научиться продумывать каждое движение перед тем, как его выполнить.',type_post='article', id_author_id=2)
+<Post: Post object (2)>
+
+Post.objects.create(head_article='Виктория Мешкова - чепионка Европы!', text_post='«Исторического достижения добилась 25 ноября Виктория Мешкова (Свердловская область) на Чемпионате Европы в Москве. В один год она стала сильнейшей на континенте и в боулдеринге, и в трудности.',type_post='article', id_author_id=2)
+<Post: Post object (3)>
+
+
+
+
+Добавление разделов к постам
+cat1=Category.objects.get(id=5)
+cat1.name
+'Спорт'
+post1=Post.objects.get(id=1)
+post1.category.add(cat1)
+
+cat1=Category.objects.get(id=6)
+post1.category.add(cat1)
+
+post1=Post.objects.get(id=2)
+post1.category.add(cat1)
+
+post1=Post.objects.get(id=3)
+post1.category.add(cat1)
+
+проверка методов
+
+post1=Post.objects.get(id=3)
+>>> post1.like()
+>>> post1.like()
+.....
+>>> post1.sum_rank
+post1.preview()
+
+
+создание комментариев
+user1=User.objects.get(id=1)
+user1.username
+'alp-rostov'
+Comments.objects.create(id_post=post1, text='Комментарий 1', id_users=user1)
+
+user1=User.objects.get(id=2)
+post1=Post.objects.get(id=2)
+Comments.objects.create(id_post=post1, text='Комментарий 2', id_users=user1)
+
+post1=Post.objects.get(id=1)
+user=User.objects.get(id=1)
+Comments.objects.create(id_post=post1, text='Комментарий 3', id_users=user)
+Comments.objects.create(id_post=post1, text='Комментарий 4', id_users=user)
+post1=Post.objects.get(id=3)
+Comments.objects.create(id_post=post1, text='Комментарий 6', id_users=user)
+Comments.objects.create(id_post=post1, text='Комментарий 7', id_users=user)
+...
+
+c=comments.objects.get(id=2)
+c.like()
+.....
+c.sum_rank
+
+Обновить рейтинги пользователей.
+Author.update_rating()
+
+Вывести username и рейтинг лучшего пользователя (применяя сортировку и возвращая поля первого объекта).
+c=Author.objects.order_by('-rank').first()
+c.id_users.username
+c.rank
+
+Вывести дату добавления, username автора, рейтинг, заголовок и превью лучшей статьи, 
+основываясь на лайках/дислайках к этой статье.
+c=Post.objects.order_by('-sum_rank').first()
+c.preview()
+'«Исторического достижения добилась 25 ноября Виктория Мешкова (Свердловская область) на Чемпионате Европы в Москве. В один г'
+c.head_article
+'Виктория Мешкова - чепионка Европы!'
+c.date.strftime("%Y-%m-%d-%H.%M.%S")
+c.id_author.id_users.username
+'alp-rostov'
+
+
+Вывести все комментарии (дата, пользователь, рейтинг, текст) к этой статье.
+ Comments.objects.filter(id_post=c.id).values('date','sum_rank','text','id_users')

@@ -204,3 +204,32 @@ NameError: name 'comments' is not defined
 >>> c.like()
 >>> c.sum_rank
 1
+
+
+
+
+
+
+ c=Author.objects.order_by('-rank').first()
+>>> c.id_users.username
+'alp-rostov'
+>>> c.rank
+51
+
+
+c=Post.objects.order_by('-sum_rank').first()
+>>> c.preview()
+'«Исторического достижения добилась 25 ноября Виктория Мешкова (Свердловская область) на Чемпионате Европы в Москве. В один г'
+>>> c.head_article
+'Виктория Мешкова - чепионка Европы!'
+
+  c.date.strftime("%Y-%m-%d-%H.%M.%S")
+
+
+  >>> c.id_author.id_users.username
+'alp-rostov'
+>>>
+
+
+ Comments.objects.filter(id_post=c.id).values('date','sum_rank','text','id_users')
+

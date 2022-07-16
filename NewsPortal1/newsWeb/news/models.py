@@ -53,12 +53,19 @@ class Author(models.Model): #Table for the author
     full_name=models.CharField(max_length=255)
     e_mail=models.EmailField(max_length=150, null=True)
     rank=models.IntegerField(default=0)
-    id_users=models.OneToOneField(User, on_delete=models.CASCADE)
+    id_users=models.OneToOneField(User, on_delete=models.DO_NOTHING)
 
     def update_rating (self):
-        # a=Post.objects.filter(id_author=self.id).aggregate(Sum('sum_rank'))['sum_rank__sum']*3
-        # b=Comments.objects.filter(id_users=self.id_users).aggregate(Sum('sum_rank'))['sum_rank__sum']
-        c = Comments.objects.filter ( id_post=Post.objects.id ).aggregate ( Sum ( 'sum_rank' ) )['sum_rank__sum']
-        #Comments.objects.filter ( id_post=Post.objects.get(id_author=1) ).aggregate ( Sum ( 'sum_rank' ) )
+        a=Post.objects.filter(id_author=self.id).aggregate(Sum('sum_rank'))['sum_rank__sum']*3
+        b=Comments.objects.filter(id_users=self.id_users).aggregate(Sum('sum_rank'))['sum_rank__sum']
+        c = Post.objects.filter(id_author=self.id).values('id')
+        d=0
+        for i in c:
+            d+=Comments.objects.filter ( id_post=i['id'] ).aggregate ( Sum ( 'sum_rank' ) )['sum_rank__sum']
+        self.rank=a+b+d
+        self.save()
 
-        return Author.objects.get(id=1).id_users.username
+
+#Author.objects.order_by('-rank').values('full_name', 'rank')[0]  рейтинг лучшего пользователя
+#Author.objects.order_by('-rank').first().rank
+#Author.objects.order_by('-rank').first().id_users.username
