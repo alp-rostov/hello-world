@@ -99,7 +99,7 @@ c.like()
 c.sum_rank
 
 Обновить рейтинги пользователей.
-Author.update_rating()
+author1.update_rating()
 
 Вывести username и рейтинг лучшего пользователя (применяя сортировку и возвращая поля первого объекта).
 c=Author.objects.order_by('-rank').first()
