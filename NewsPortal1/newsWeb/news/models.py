@@ -61,7 +61,7 @@ class Author(models.Model): #Table for the author
         c = Post.objects.filter(id_author=self.id).values('id') #list (type dict) of the post`s 'id'
         d=0
         for i in c:
-            com=Comments.objects.filter ( id_post=i['id'] ).aggregate ( Sum ( 'sum_rank' ) )['sum_rank__sum']
+            com=Comments.objects.filter ( id_post=i['id'] ).aggregate( Sum ( 'sum_rank' ) )['sum_rank__sum']
             if com!=None: #checking if the post has no comments
                 d+=com
         self.rank=a+b+d

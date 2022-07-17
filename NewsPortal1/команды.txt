@@ -101,22 +101,24 @@ c.sum_rank
 Обновить рейтинги пользователей.
 author1.update_rating()
 
+
 Вывести username и рейтинг лучшего пользователя (применяя сортировку и возвращая поля первого объекта).
 c=Author.objects.order_by('-rank').first()
 c.id_users.username
 c.rank
+или
+Author.objects.order_by('-rank').values('id_users__username','rank')[0] 
+
 
 Вывести дату добавления, username автора, рейтинг, заголовок и превью лучшей статьи, 
 основываясь на лайках/дислайках к этой статье.
 c=Post.objects.order_by('-sum_rank').first()
 c.preview()
-'«Исторического достижения добилась 25 ноября Виктория Мешкова (Свердловская область) на Чемпионате Европы в Москве. В один г'
 c.head_article
-'Виктория Мешкова - чепионка Европы!'
 c.date.strftime("%Y-%m-%d-%H.%M.%S")
 c.id_author.id_users.username
 'alp-rostov'
 
 
 Вывести все комментарии (дата, пользователь, рейтинг, текст) к этой статье.
- Comments.objects.filter(id_post=c.id).values('date','sum_rank','text','id_users')
+ Comments.objects.filter(id_post=c.id).values('text','id_users__username','date','sum_rank',)

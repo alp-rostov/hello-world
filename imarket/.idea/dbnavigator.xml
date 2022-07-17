@@ -44,6 +44,7 @@
         <condition column="id" operator="=" value="" active="true" />
       </filter>
     </filter-actions>
+    <filter-actions connection-id="2de399db-fac6-4ca4-b7d5-3bfc538fd7e5" dataset="main.shop_order" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
