@@ -21,7 +21,7 @@ class Comments(models.Model): #Table of comments for the post
         self.save()
 
     def dislike(self):
-        if self.sum_rank>0:
+        if self.sum_rank>0: #the rating cannot be negative
             self.sum_rank=self.sum_rank-1
             self.save()
 
@@ -42,7 +42,7 @@ class Post(models.Model): #Table for the posts
         self.save()
 
     def dislike(self):
-        if self.sum_rank > 0:
+        if self.sum_rank > 0: #the rating cannot be negative
             self.sum_rank = self.sum_rank-1
             self.save ()
 
@@ -53,19 +53,16 @@ class Author(models.Model): #Table for the author
     full_name=models.CharField(max_length=255)
     e_mail=models.EmailField(max_length=150, null=True)
     rank=models.IntegerField(default=0)
-    id_users=models.OneToOneField(User, on_delete=models.DO_NOTHING)
+    id_users=models.OneToOneField(User, on_delete=models.DO_NOTHING) #onetomany relation to the table "User"
 
     def update_rating (self):
         a=Post.objects.filter(id_author=self.id).aggregate(Sum('sum_rank'))['sum_rank__sum']*3
         b=Comments.objects.filter(id_users=self.id_users).aggregate(Sum('sum_rank'))['sum_rank__sum']
-        c = Post.objects.filter(id_author=self.id).values('id')
+        c = Post.objects.filter(id_author=self.id).values('id') #list (type dict) of the post`s 'id'
         d=0
         for i in c:
-            d+=Comments.objects.filter ( id_post=i['id'] ).aggregate ( Sum ( 'sum_rank' ) )['sum_rank__sum']
+            com=Comments.objects.filter ( id_post=i['id'] ).aggregate ( Sum ( 'sum_rank' ) )['sum_rank__sum']
+            if com!=None: #checking if the post has no comments
+                d+=com
         self.rank=a+b+d
         self.save()
-
-
-#Author.objects.order_by('-rank').values('full_name', 'rank')[0]  рейтинг лучшего пользователя
-#Author.objects.order_by('-rank').first().rank
-#Author.objects.order_by('-rank').first().id_users.username

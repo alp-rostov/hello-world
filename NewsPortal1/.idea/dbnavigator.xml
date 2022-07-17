@@ -38,6 +38,9 @@
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="9aa76583-0fb5-4d58-b4c6-8237bca2a192" />
   </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="9aa76583-0fb5-4d58-b4c6-8237bca2a192" dataset="main.news_post" active-filter-id="" />
+  </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
   </component>
