@@ -29,8 +29,7 @@ class Order ( models.Model ):
     cost = models.FloatField ( default=0.0 )
     pickup = models.BooleanField ( default=False )
     complete = models.BooleanField ( default=False )
-    staff = models.ForeignKey ( Staff, on_delete=models.CASCADE )
-
+    staff = models.ForeignKey ( Staff, on_delete=models.CASCADE)
     products = models.ManyToManyField ( Product, through='ProductOrder' )
 
 class ProductOrder ( models.Model ):

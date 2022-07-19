@@ -121,4 +121,6 @@ c.id_author.id_users.username
 
 
 Вывести все комментарии (дата, пользователь, рейтинг, текст) к этой статье.
- Comments.objects.filter(id_post=c.id).values('text','id_users__username','date','sum_rank',)
+Comments.objects.filter(id_post=c.id).values('text','id_users__username','date','sum_rank',)
+или
+c.comments_set.all().values('text','id_users__username','date','sum_rank',)
