@@ -1,0 +1,23 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Информационный ресурс SkillFakctory:
+новости, статьи, аналитика
+{% endblock title %}
+
+{% block content %}
+{% for i in news %}
+    <div class="col">
+      <div class="post">
+            <h4>{{ i.date }}</h4>
+
+          <h3>{{ i.head_article }}</h3>
+        <p>{{ i.text_post|truncatewords:20 }}
+        <a href="{{ i.id }}">подробнее...</a>
+
+        </p>
+      </div>
+    </div>
+{% endfor %}
+
+{% endblock content %}

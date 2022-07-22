@@ -20,7 +20,6 @@ urlpatterns = [
     path ('admin/', admin.site.urls ),
     path('pages/', include('django.contrib.flatpages.urls')),
     path ( 'products/', include ( 'shop.urls' ) ),
-    path ( 'staff/', include ( 'shop.urls' ) ),
 
 ]
 

@@ -139,7 +139,7 @@ textarea {
 .col {
 	float:left;
 	display:inline;
-	width:290px;
+	width:590px;
 	margin-right:28px;
 	padding-bottom:41px;
 }
@@ -159,6 +159,12 @@ textarea {
 }
 .post {
 }
+.post h2 {
+	color:#000;
+	font-size:30px;
+	font-style:italic;
+	line-height:35px;
+}
 .post h3 {
 	color:#000;
 	font-size:22px;
@@ -166,10 +172,12 @@ textarea {
 	line-height:22px;
 }
 .post p {
+    font-size:17px;
 	padding-top:10px;
 }
+
 .post p a {
-	color:#4c4c4c;
+	color:blue;
 	text-decoration:underline;
 }
 .post p a:hover {
