@@ -1,4 +1,5 @@
 {% extends 'flatpages/default.html' %}
+{% load custom_filters%}
 
 {% block title %}
 Информационный ресурс SkillFakctory:
@@ -6,16 +7,14 @@
 {% endblock title %}
 
 {% block content %}
+<h2>Всего новостей: {{ news|length }}</h2><hr><br>
 {% for i in news %}
     <div class="col">
-      <div class="post">
-            <h4>{{ i.date|date:'M d Y' }}</h4>
-
-          <h3>{{ i.head_article }}</h3>
-        <p>{{ i.text_post|truncatewords:20 }}
-        <a href="{{ i.id }}">подробнее...</a>
-
-        </p>
+       <div class="post">
+           <h3>{{ i.head_article| censor}}</h3>
+            <h4>{{ i.date|date:'d E Y' }}</h4>
+            <p>{{ i.text_post|truncatewords:20| censor }}
+            <a href="{{ i.id }}">подробнее...</a></p>
       </div>
     </div>
 {% endfor %}

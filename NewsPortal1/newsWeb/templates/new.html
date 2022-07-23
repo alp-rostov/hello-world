@@ -1,4 +1,5 @@
 {% extends 'flatpages/default.html' %}
+{% load custom_filters %}
 
 {% block title %}
 Информационный ресурс SkillFakctory:
@@ -9,19 +10,23 @@
 
     <div class="col">
       <div class="post">
-            <h3>{{ new.date }}</h3>
-            <h2 >{{ new.head_article }}</h2>
-        <p class="new">{{ new.text_post }}
+            <h3>{{ new.date|date:'d E Y' }}</h3>
+            <h2 >{{ new.head_article| censor }}</h2>
+        <p class="new">{{ new.text_post| censor }}
             <br><br><i>Автор:
-            <a class="tooltip" href="mailto:">{{ new.id_author.full_name }}
+            <a class="tooltip" href="mailto:">{{ new.id_author.full_name | currency }}
                 <span><img src="/static/author/{{new.id_author.id }}.jpg" width="150" align="left" >
                 </span></a></i>
                 <br><br>
                 <h3>Комментарии:</h3>
-                {% for i in comments %}
-                <p><b>{{ i.date }}</b> | <b>{{ i.id_users__username }}</b> | <b>рейтинг: {{ i.sum_rank }} :<br> {{ i.text }}</p>
-                {% endfor %}
-
+                {% if comments %}
+                    {% for i in comments %}
+                        <p><b>{{ i.date }}</b> | <b>{{ i.id_users__username }}</b> | <b>рейтинг:
+                        {{ i.sum_rank }}</b> :<br> {{ i.text }} </p>
+                    {% endfor %}
+                {% else %}
+                    <p>нет комментариев</p>
+                {% endif %}
         </p>
       </div>
     </div>

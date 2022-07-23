@@ -1,8 +1,6 @@
 from datetime import datetime
 from django.views.generic import ListView, DetailView
-from .models import Post, Comments
-from pprint import pprint
-from django.db.models import Avg
+from .models import Post
 class NewsList(ListView):
     model = Post
     ordering = '-date'
@@ -16,12 +14,6 @@ class NewsList(ListView):
         context = super().get_context_data(**kwargs)
         # К словарю добавим текущую дату в ключ 'time_now'.
         context['time_now'] = datetime.utcnow()
-        # Добавим ещё одну пустую переменную,
-        # чтобы на её примере рассмотреть работу ещё одного фильтра.
-        # context['count_comments'] = context['news'].comments_set.all ( ).agregate(Avg(id))
-        # #
-        # # >> > Book.objects.all ( ).aggregate ( Avg ( 'price' ) )
-        # pprint(context['news'])
         return context
 
 class News(DetailView):
