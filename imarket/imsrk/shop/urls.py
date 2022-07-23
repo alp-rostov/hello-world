@@ -14,6 +14,6 @@ urlpatterns = [
    # int — указывает на то, что принимаются только целочисленные значения
    path ('', ProductsList.as_view ( ) ),
    path ( '<int:pk>', ProductDetail.as_view()),
-   path ('', StaffList.as_view())
+   path ('home/', StaffList.as_view())
 
 ]

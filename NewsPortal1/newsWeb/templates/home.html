@@ -9,7 +9,7 @@
 {% for i in news %}
     <div class="col">
       <div class="post">
-            <h4>{{ i.date }}</h4>
+            <h4>{{ i.date|date:'M d Y' }}</h4>
 
           <h3>{{ i.head_article }}</h3>
         <p>{{ i.text_post|truncatewords:20 }}

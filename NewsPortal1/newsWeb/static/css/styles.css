@@ -184,6 +184,21 @@ textarea {
 	color:#ff0000;
 	text-decoration:none;
 }
+
+.tooltip span{
+    border-radius: 5px 5px 5px 5px;
+    visibility: hidden;
+    position: absolute;
+    left: 200px;
+    background: #fff;
+    box-shadow: -2px 2px 10px -1px #333;
+    border-radius: 5px;
+}
+
+.tooltip:hover span{
+visibility: visible;
+}
+
 .footer {
 	font-family:Verdana, sans-serif;
 	font-size:9px;
