@@ -23,4 +23,6 @@ class News(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['comments']= context['new'].comments_set.all().values('text','id_users__username','date','sum_rank',)
+        context['next'] = Post.objects.filter(id__gt=context['new'].id).order_by('id').values('id').first()
+        context['prev'] = Post.objects.filter (id__lt=context['new'].id ).order_by('-id').values ( 'id' ).first()
         return context

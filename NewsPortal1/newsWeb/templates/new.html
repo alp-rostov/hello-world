@@ -28,6 +28,16 @@
                     <p>нет комментариев</p>
                 {% endif %}
         </p>
+          <h3 align="center">
+          {% if prev.id %}
+            <a href="/news/{{prev.id}}" title="Предыдущие новости"> <<- </a>
+          {% endif %}
+          |
+          {% if next.id %}
+            <a href="/news/{{next.id}}" title="Следующие новости"> ->> </a>
+          {% endif %}
+          <h3>
+
       </div>
     </div>
 
