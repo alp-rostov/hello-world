@@ -7,13 +7,16 @@
 </title>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css" media="all" />
-<link rel="shortcut icon" type="image/x-icon" href="css/images/favicon.ico" />
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css" media="all" />
+<link rel="stylesheet" href="{% static 'css/styles_form.css' %}" type="text/css" media="all" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="css/images/favicon.ico" />
 <!--[if IE 6]><link rel="stylesheet" href="{% static 'css/ie6.css' %}" type="text/css" media="all" /><![endif]-->
 
 </head>
 
 <body>
+
 <!-- START PAGE SOURCE -->
 
 <div id="header">
@@ -29,7 +32,7 @@
         <li><a href="#"><span>Статьи</span></a></li>
         </ul>
     </div>
-    <div class="cl">&nbsp;</div>
+<!--    <div class="cl">&nbsp;</div>-->
   </div>
 </div>
 
@@ -39,14 +42,15 @@
   </div>
 </div>
 
+<div align="center" >
+    {% block search %}
+    {% endblock search %}
+</div>
+
 <div id="main">
   <div class="shell">
         {% block content %}
         {% endblock content %}
-
-    <div class="cl"></div>
-
-    <div class="cl"></div>
   </div>
 </div>
 

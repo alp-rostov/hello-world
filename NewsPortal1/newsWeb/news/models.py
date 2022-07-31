@@ -66,3 +66,6 @@ class Author(models.Model): #Table for the author
                 d+=com
         self.rank=a+b+d
         self.save()
+
+    def __str__(self):
+        return f'{self.full_name}'

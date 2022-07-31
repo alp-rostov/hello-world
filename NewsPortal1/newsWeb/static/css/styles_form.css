@@ -1,0 +1,27 @@
+form {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 50%;
+  padding:10px;
+  margin:10px 0;
+  align:center;
+}
+input[type=text],select {
+    width:30%;
+    padding:15px;
+    margin:10px 0;
+    border:2px solid #ccc;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+input[type=text]:focus {
+    border-color:#333;
+}
+input[type=submit] {
+    padding:5px 15px;
+    background:#ccc;
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
