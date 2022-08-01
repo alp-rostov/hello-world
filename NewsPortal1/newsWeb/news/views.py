@@ -23,7 +23,7 @@ class NewsFilter(ListView):
     model = Post
     template_name = 'search.html'
     context_object_name = 'news'
-
+    ordering = '-date'
     def get_queryset(self):
         # Получаем обычный запрос
         queryset = super ( ).get_queryset ( )

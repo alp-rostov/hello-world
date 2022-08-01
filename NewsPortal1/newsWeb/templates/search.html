@@ -8,9 +8,11 @@
 {% endblock title %}
 
 {% block search %}
+
+
     <form action="" method="get">
+        {% csrf_token %}
         {{ filter.form.as_p }}
-        <input type="date">
         <input type="submit" value="Найти">
     </form>
 {% endblock search %}
