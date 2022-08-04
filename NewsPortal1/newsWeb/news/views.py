@@ -1,14 +1,16 @@
 from datetime import datetime
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post
 from .filters import news_filter
+from .forms import Create_news
+from django.urls import reverse_lazy
 
 class NewsList(ListView):
     model = Post
     ordering = '-date'
     template_name = 'home.html'
     context_object_name = 'news'
-    paginate_by = 2
+    paginate_by = 5
     def get_context_data(self, **kwargs):
         # С помощью super() мы обращаемся к родительским классам
         # и вызываем у них метод get_context_data с теми же аргументами,
@@ -36,8 +38,6 @@ class NewsFilter(ListView):
         # Возвращаем из функции отфильтрованный список товаров
         return self.filter.qs
 
-
-
     def get_context_data(self, **kwargs):
         # С помощью super() мы обращаемся к родительским классам
         # и вызываем у них метод get_context_data с теми же аргументами,
@@ -47,7 +47,6 @@ class NewsFilter(ListView):
         # К словарю добавим текущую дату в ключ 'time_now'.
         context['filter'] = news_filter
         return context
-
 
 class News(DetailView):
     model = Post
@@ -59,3 +58,32 @@ class News(DetailView):
         context['next'] = Post.objects.filter(id__gt=context['new'].id).order_by('id').values('id').first()
         context['prev'] = Post.objects.filter (id__lt=context['new'].id ).order_by('-id').values ( 'id' ).first()
         return context
+
+class Create_n(CreateView):
+    # Указываем нашу разработанную форму
+    form_class = Create_news
+    # модель товаров
+    model = Post
+    # и новый шаблон, в котором используется форма.
+    template_name = 'create.html'
+
+    def form_valid(self, form):
+        Create_news = form.save ( commit=False )
+        if self.request.path=='news/create':
+            Create_news.type_post = 'news'
+        else:
+            Create_news.type_post = 'article'
+        return super ( ).form_valid ( form )
+
+class Create_edit(UpdateView):
+    # Указываем нашу разработанную форму
+    form_class = Create_news
+    # модель товаров
+    model = Post
+    # и новый шаблон, в котором используется форма.
+    template_name = 'create.html'
+
+class Delete_news(DeleteView):
+    model = Post
+    template_name = 'delete.html'
+    success_url = reverse_lazy('home')

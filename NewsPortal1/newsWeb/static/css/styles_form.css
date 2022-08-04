@@ -6,8 +6,9 @@ form {
   margin:10px;
   align:center;
 }
-input[type=text],select,input[type]=date {
-    width:50%;
+
+
+input[type=text],select,input[type=date],textarea {
     padding:10px;
     margin:10px;
     border:2px solid #ccc;
