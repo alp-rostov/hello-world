@@ -68,8 +68,9 @@ class Create_n(CreateView):
     template_name = 'create.html'
 
     def form_valid(self, form):
+        print(self.request.path)
         Create_news = form.save ( commit=False )
-        if self.request.path=='news/create':
+        if self.request.path=='/home/news/create':
             Create_news.type_post = 'news'
         else:
             Create_news.type_post = 'article'

@@ -12,11 +12,16 @@ urlpatterns = [
    # Для этого вызываем метод as_view.
    # pk — это первичный ключ товара, который будет выводиться у нас в шаблон
    # int — указывает на то, что принимаются только целочисленные значения
-   path ('', NewsList.as_view ( ), name='home' ),
+   path ( '', NewsList.as_view ( ), name='home' ),
    path ( '<int:pk>', News.as_view(), name='news'),
    path ( 'search', NewsFilter.as_view ( ), name='search' ),
-   path ( 'create', Create_n.as_view(), name='create_news'),
-   path ( 'article/', Create_n.as_view(), name='create_article'),
-   path('<int:pk>/update/', Create_edit.as_view(), name='edit'),
-   path ( '<int:pk>/delete/', Delete_news.as_view ( ), name='delete' ),
+
+   path ( 'news/create', Create_n.as_view(), name='create_news'),
+   path ( 'news/<int:pk>/update/', Create_edit.as_view ( ), name='edit' ),
+   path ( 'news/<int:pk>/delete/', Delete_news.as_view ( ), name='delete' ),
+
+   path ( 'article/create', Create_n.as_view(), name='create_article'),
+   path ( 'article/<int:pk>/update/', Create_edit.as_view ( ), name='edit' ),
+   path ( 'article/<int:pk>/delete/', Delete_news.as_view ( ), name='delete' ),
+
 ]
