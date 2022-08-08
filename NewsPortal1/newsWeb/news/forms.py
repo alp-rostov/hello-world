@@ -1,9 +1,20 @@
 from django import forms
+from .models import Author
 from .models import Post
-from django.core.exceptions import ValidationError
+
+# from django.http import request
+# from django.core.exceptions import ValidationError
 
 class Create_news(forms.ModelForm):
-    # type_post= forms.CharField ( widget=forms.HiddenInput ( ), required=False, initial='')
+    id_author = forms.ModelChoiceField(
+        label='Автор',
+        queryset=Author.objects.order_by ( '-full_name' ).all ( ),
+        empty_label='Выберите автора',
+    )
+    head_article=forms.CharField(
+        label='Название - заголовок'
+    )
+    text_post=forms.CharField(label='Текст', widget=forms.Textarea)
 
     class Meta:
         model = Post
@@ -11,7 +22,6 @@ class Create_news(forms.ModelForm):
             'head_article',
             'text_post',
             'id_author',
-            # 'type_post'
         ]
 
     #

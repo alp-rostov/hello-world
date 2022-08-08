@@ -33,7 +33,7 @@ class Post(models.Model): #Table for the posts
     text_post=models.TextField() #text
     date=models.DateTimeField(auto_now_add = True) #date of the post will be added
     type_post=models.CharField(max_length = 20, choices = POSITIONS, default = 'news') #post`s type : news or article
-    sum_rank = models.IntegerField ( default=0 )
+    sum_rank = models.IntegerField ( default=0)
     id_author=models.ForeignKey('Author', on_delete=models.CASCADE) # onetomany relation to the table "Author"
 
     category=models.ManyToManyField('Category', through=PostCategory) #manytomany relation to the table "Category"

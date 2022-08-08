@@ -4,6 +4,7 @@ from .models import Post
 from .filters import news_filter
 from .forms import Create_news
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class NewsList(ListView):
     model = Post
@@ -76,7 +77,7 @@ class Create_n(CreateView):
             Create_news.type_post = 'article'
         return super ( ).form_valid ( form )
 
-class Create_edit(UpdateView):
+class Create_edit(LoginRequiredMixin, UpdateView):
     # Указываем нашу разработанную форму
     form_class = Create_news
     # модель товаров
