@@ -24,4 +24,5 @@ urlpatterns = [
    path ( 'article/<int:pk>/update/', Create_edit.as_view ( ), name='edit' ),
    path ( 'article/<int:pk>/delete/', Delete_news.as_view ( ), name='delete' ),
 
+
 ]

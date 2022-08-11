@@ -6,7 +6,23 @@
 новости, статьи, аналитика
 {% endblock title %}
 
+{% block search %}
+    {% if request.user.username %}
+        <p>Пользователь: {{request.user.username}}&nbsp|&nbsp<a href="/home/sign/logout/">Выйти</a>
+        </p>
+    {% else %}
+        <p><button> <a href="/home/accounts/login"> Войти в систему </a></button> | <button> <a href="/home/accounts/signup"> Регистрация </a></button></p>
+    {% endif %}
+
+    {% if get_author %}
+        <button> <a href="sign/upgrade/">Стать автором</a> </button>
+    {% endif %}
+{% endblock search %}
+
+
+
 {% block content %}
+
 {% for i in news %}
     <div class="col">
        <div class="post">

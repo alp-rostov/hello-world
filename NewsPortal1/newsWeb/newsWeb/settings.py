@@ -23,12 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-etx^^#7*k1imc*+ulry%7g(%bx3l%z3k)4osswog!+vtf9chvk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
-
-
+ALLOWED_HOSTS = ['127.0.0.1']
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -94,6 +91,10 @@ TEMPLATES = [
         },
     },
 ]
+# Чтобы allauth распознал нашу форму как ту, что должна выполняться вместо формы по умолчанию, необходимо добавить строчку в файл настроек проекта settings.py:
+
+ACCOUNT_FORMS = {'signup': 'sign.models.BasicSignupForm'}
+
 
 WSGI_APPLICATION = 'newsWeb.wsgi.application'
 
@@ -127,7 +128,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 LOGIN_URL = '/home/accounts/login'
-LOGIN_REDIRECT_URL = '/home/'
+LOGIN_REDIRECT_URL = '/'
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
