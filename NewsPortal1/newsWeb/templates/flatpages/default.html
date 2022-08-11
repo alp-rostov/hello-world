@@ -41,11 +41,7 @@
 <div id="featured-content">
   <div class="shell">
     <h2>Добро пожаловать! </h2>
-    {% if request.user.username %}
-        <p>Пользователь: {{request.user.username}}&nbsp|&nbsp<a href="/home/sign/logout/">Выйти</a></p>
-    {% else %}
-    <p><button> <a href="/home/accounts/login"> Войти в систему </a></button> | <button> <a href="/home/accounts/signup"> Регистрация </a></button></p>
-    {% endif %}
+
   </div>
 </div>
 
