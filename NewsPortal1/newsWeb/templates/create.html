@@ -1,0 +1,19 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block title %}
+Информационный ресурс SkillFakctory:
+Создание новостей и статей
+{% endblock title %}
+
+{% block search %}
+{% endblock search %}
+
+{% block content %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save" />
+</form>
+{% endblock content %}

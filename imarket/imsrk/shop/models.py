@@ -19,9 +19,10 @@ class Staff ( models.Model ):
     labor_contract = models.IntegerField ( )
 
 class Product ( models.Model ):
-    name = models.CharField ( max_length=255 )
+    name = models.CharField ( max_length=255)
     price = models.FloatField ( default=0.0)
     composition = models.TextField ( default="Состав не указан" )
+
 
 class Order ( models.Model ):
     time_in = models.DateTimeField ( auto_now_add=True )

@@ -1,0 +1,70 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters%}
+
+{% block title %}
+Информационный ресурс SkillFakctory:
+новости, статьи, аналитика
+{% endblock title %}
+
+{% block search %}
+    {% if request.user.username %}
+        <p>Пользователь: {{request.user.username}}&nbsp|&nbsp<a href="/home/sign/logout/">Выйти</a>
+        </p>
+    {% else %}
+        <p><button> <a href="/home/accounts/login"> Войти в систему </a></button> | <button> <a href="/home/accounts/signup"> Регистрация </a></button></p>
+    {% endif %}
+
+    {% if get_author %}
+        <button> <a href="sign/upgrade/">Стать автором</a> </button>
+    {% endif %}
+{% endblock search %}
+
+
+
+{% block content %}
+
+{% for i in news %}
+    <div class="col">
+       <div class="post">
+           <h3>{{ i.head_article| censor}}</h3>
+            <h4>{{ i.date|date:'d E Y' }}</h4>
+            <p>{{ i.text_post|truncatewords:20| censor }}
+            <a href="{{ i.id }}">подробнее...</a> |
+            <a href="news/{{ i.id }}/update">редактировать...</a> |
+            <a href="news/{{ i.id }}/delete">удалить</a>
+
+            </p>
+
+      </div>
+    </div>
+{% endfor %}
+
+{# Добавляем пагинацию на страницу #}
+
+<div class="col">
+    <div class="post">
+        <p>
+        {# Информация о предыдущих страницах #}
+        {% if page_obj.has_previous %}
+            <a href="?page=1" class="p">1</a>
+            {% if page_obj.previous_page_number != 1 %}
+                ...
+                <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+            {% endif %}
+        {% endif %}
+
+{# Информация о текущей странице #}
+        {{ page_obj.number }}
+{# Информация о следующих страницах #}
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+            {% if paginator.num_pages != page_obj.next_page_number %}
+                ...
+                <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+            {% endif %}
+        {% endif %}
+        </p>
+    </div>
+</div>
+
+{% endblock content %}

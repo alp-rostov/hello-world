@@ -1,0 +1,22 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters%}
+
+
+{% block title %}
+Информационный ресурс SkillFakctory:
+Поиск новостей
+{% endblock title %}
+
+{% block search %}
+
+
+{% endblock search %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <p>Удаляем "{{ object.name }}"?</p>
+    <input type="submit" value="Delete" />
+</form>
+
+{% endblock content %}

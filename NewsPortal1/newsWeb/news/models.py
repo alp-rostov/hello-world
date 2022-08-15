@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Sum
+from django.urls import reverse
 
 class Category(models.Model): #Table of categories
     name=models.CharField(max_length=255, unique=True)
@@ -32,7 +33,7 @@ class Post(models.Model): #Table for the posts
     text_post=models.TextField() #text
     date=models.DateTimeField(auto_now_add = True) #date of the post will be added
     type_post=models.CharField(max_length = 20, choices = POSITIONS, default = 'news') #post`s type : news or article
-    sum_rank = models.IntegerField ( default=0 )
+    sum_rank = models.IntegerField ( default=0)
     id_author=models.ForeignKey('Author', on_delete=models.CASCADE) # onetomany relation to the table "Author"
 
     category=models.ManyToManyField('Category', through=PostCategory) #manytomany relation to the table "Category"
@@ -48,6 +49,9 @@ class Post(models.Model): #Table for the posts
 
     def preview(self):
         return self.text_post[0:124]
+
+    def get_absolute_url(self):
+        return reverse ( 'news', args=[str ( self.id )] )
 
 class Author(models.Model): #Table for the author
     full_name=models.CharField(max_length=255)
@@ -66,3 +70,6 @@ class Author(models.Model): #Table for the author
                 d+=com
         self.rank=a+b+d
         self.save()
+
+    def __str__(self):
+        return f'{self.full_name}'
