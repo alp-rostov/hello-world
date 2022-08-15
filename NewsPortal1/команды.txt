@@ -8,10 +8,6 @@ Category.objects.create(name='Спорт')
 Category.objects.create(name='Технологии')
 Category.objects.create(name='Религия')
 
-
-
-
-
 -добавбление категории и к посту
 post1=Post.objects.get(id=3)
 cat1=Category.objects.get(id=4) 
