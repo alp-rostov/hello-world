@@ -1,10 +1,11 @@
 from datetime import datetime
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post
+from .models import Post, Category
 from .filters import news_filter
 from .forms import Create_news
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.http import HttpResponseRedirect, request
 
 class NewsList(ListView):
     model = Post
@@ -76,14 +77,21 @@ class Create_n(PermissionRequiredMixin, CreateView):
     template_name = 'create.html'
     permission_required = ('news.add_post',)
 
+
     def form_valid(self, form):
-        print(self.request.path)
+        b= self.request.POST['category'][0]
         Create_news = form.save ( commit=False )
         if self.request.path=='/home/news/create':
             Create_news.type_post = 'news'
         else:
             Create_news.type_post = 'article'
-        return super ( ).form_valid ( form )
+        Create_news.save()
+
+        post1 = Create_news # add category
+        cat1 = Category.objects.get ( pk=b)
+        post1.category.add ( cat1 )
+
+        return HttpResponseRedirect('/home/')
 
 class Create_edit(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
     # Указываем нашу разработанную форму
