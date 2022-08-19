@@ -25,6 +25,7 @@ class NewsList(ListView):
 
         context = super ( ).get_context_data ( **kwargs )
         context['get_author'] = not self.request.user.groups.filter ( name='author' ).exists ( )
+        context['get_group'] = 'привет'
 
         return context
 
