@@ -1,5 +1,5 @@
 from django_filters import FilterSet, DateFilter, CharFilter, ModelChoiceFilter
-from .models import Post, Author
+from .models import Post, Author, Category
 from django import forms
 
 class news_filter(FilterSet):
@@ -13,6 +13,13 @@ class news_filter(FilterSet):
         field_name='id_author__full_name',
         label='Автор',
         queryset=Author.objects.order_by('full_name').all(),
+        lookup_expr='icontains',
+    )
+
+    category = ModelChoiceFilter (
+        field_name='category__name',
+        label='Категория',
+        queryset=Category.objects.order_by ( 'name' ).all ( ),
         lookup_expr='icontains',
     )
 

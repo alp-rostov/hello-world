@@ -7,7 +7,7 @@
 </title>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 {% load static %}
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css" media="all" />
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css" media="all" />
 <link rel="stylesheet" href="{% static 'css/styles_form.css' %}" type="text/css" media="all" />
 
 <!--[if IE 6]><link rel="stylesheet" href="{% static 'css/ie6.css' %}" type="text/css" media="all" /><![endif]-->
@@ -33,24 +33,20 @@
 
         </ul>
     </div>
-<!--    <div class="cl">&nbsp;</div>-->
   </div>
 </div>
 
 <div id="featured-content">
   <div class="shell">
     <h2>Добро пожаловать! </h2>
+    {% block search %}
+    {% endblock search %}
 
   </div>
 </div>
 
-<div align="center" >
-    {% block search %}
 
-    {% endblock search %}
-</div>
-
-<div id="main">
+<div>
   <div class="shell">
         {% block content %}
         {% endblock content %}

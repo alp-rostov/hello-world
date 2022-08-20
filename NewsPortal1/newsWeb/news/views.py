@@ -6,6 +6,9 @@ from .forms import Create_news
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponseRedirect, request
+from django.shortcuts import redirect
+from django.contrib.auth.models import User
+
 
 class NewsList(ListView):
     model = Post
@@ -13,7 +16,6 @@ class NewsList(ListView):
     template_name = 'home.html'
     context_object_name = 'news'
     paginate_by = 5
-
     def get_context_data(self, **kwargs):
         # С помощью super() мы обращаемся к родительским классам
         # и вызываем у них метод get_context_data с теми же аргументами,
@@ -25,9 +27,20 @@ class NewsList(ListView):
 
         context = super ( ).get_context_data ( **kwargs )
         context['get_author'] = not self.request.user.groups.filter ( name='author' ).exists ( )
-        context['get_group'] = 'привет'
+        context['get_category'] = Category.objects.all()
 
         return context
+
+    def get_queryset(self, **kwargs):
+
+        is_private = self.request.GET.get ( 'category', None );
+
+        if is_private:
+            queryset = Post.objects.filter ( category=is_private )
+        else:
+            queryset = super ( ).get_queryset ( )
+
+        return queryset
 
 
 class NewsFilter(ListView):
@@ -80,7 +93,8 @@ class Create_n(PermissionRequiredMixin, CreateView):
 
 
     def form_valid(self, form):
-        b= self.request.POST['category'][0]
+        b= self.request.POST.getlist('category')
+
         Create_news = form.save ( commit=False )
         if self.request.path=='/home/news/create':
             Create_news.type_post = 'news'
@@ -88,9 +102,10 @@ class Create_n(PermissionRequiredMixin, CreateView):
             Create_news.type_post = 'article'
         Create_news.save()
 
-        post1 = Create_news # add category
-        cat1 = Category.objects.get ( pk=b)
-        post1.category.add ( cat1 )
+        post1 = Create_news  # add category
+        for i in b:
+            cat1 = Category.objects.get ( pk=i)
+            post1.category.add ( cat1 )
 
         return HttpResponseRedirect('/home/')
 
@@ -107,3 +122,14 @@ class Delete_news(DeleteView):
     model = Post
     template_name = 'delete.html'
     success_url = reverse_lazy('home')
+
+
+
+
+def Subscribes(request):
+    user_ = User.objects.get(username=request.user)
+    if user_ :
+        cat1 = Category.objects.get ( pk=request.GET['i'] )
+        post1 = user_
+        cat1.subscribers.add ( post1 )
+    return redirect('/home/')

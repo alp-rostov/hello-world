@@ -2,9 +2,6 @@ from django import forms
 from .models import Author
 from .models import Post, Category
 
-# from django.http import request
-# from django.core.exceptions import ValidationError
-
 class Create_news(forms.ModelForm):
     id_author = forms.ModelChoiceField(
         label='Автор',
@@ -19,6 +16,7 @@ class Create_news(forms.ModelForm):
     category= forms.ModelMultipleChoiceField(
         label='Категория',
         queryset=Category.objects.order_by ( 'name' ).all ( ),
+        widget=forms.CheckboxSelectMultiple
 
     )
 
