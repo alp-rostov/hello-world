@@ -28,13 +28,3 @@ class Create_news(forms.ModelForm):
             'id_author',
             'category'
         ]
-
-    #
-    # def clean(self):
-    #     cleaned_data = super().clean()
-    #     text_post = cleaned_data.get("text_post")
-    #     if text_post is not None and len(text_post) < 20:
-    #         raise ValidationError({
-    #             "description": "Текст не может быть менее 20 символов."
-    #         })
-    #     return cleaned_data

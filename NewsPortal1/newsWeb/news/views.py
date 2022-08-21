@@ -8,7 +8,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.http import HttpResponseRedirect, request
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
-
+from django.core.mail import EmailMultiAlternatives  # импортируем класс для создание объекта письма с html
+from django.template.loader import render_to_string  # импортируем функцию, которая срендерит наш html в текст
 
 class NewsList(ListView):
     model = Post
@@ -24,24 +25,18 @@ class NewsList(ListView):
         context = super().get_context_data(**kwargs)
         # К словарю добавим текущую дату в ключ 'time_now'.
         context['time_now'] = datetime.utcnow()
-
         context = super ( ).get_context_data ( **kwargs )
         context['get_author'] = not self.request.user.groups.filter ( name='author' ).exists ( )
         context['get_category'] = Category.objects.all()
-
         return context
 
     def get_queryset(self, **kwargs):
-
         is_private = self.request.GET.get ( 'category', None );
-
         if is_private:
-            queryset = Post.objects.filter ( category=is_private )
+            queryset = Post.objects.filter ( category=is_private ).order_by('-date')
         else:
             queryset = super ( ).get_queryset ( )
-
         return queryset
-
 
 class NewsFilter(ListView):
     model = Post
@@ -93,7 +88,7 @@ class Create_n(PermissionRequiredMixin, CreateView):
 
 
     def form_valid(self, form):
-        b= self.request.POST.getlist('category')
+        b= self.request.POST.getlist('category') # id of categories from form Create_news
 
         Create_news = form.save ( commit=False )
         if self.request.path=='/home/news/create':
@@ -102,10 +97,31 @@ class Create_n(PermissionRequiredMixin, CreateView):
             Create_news.type_post = 'article'
         Create_news.save()
 
-        post1 = Create_news  # add category
+        post1 = Create_news  # add id_post in category
         for i in b:
             cat1 = Category.objects.get ( pk=i)
             post1.category.add ( cat1 )
+
+        emails=User.objects.filter ( category__id__in=b).values('email').distinct()
+        emails_list = [item['email'] for item in emails] # mail list for sent mail
+
+        html_content = render_to_string (
+            'appointment_created.html',
+            {
+                'Create_news': Create_news,
+            }
+        )
+        # в конструкторе уже знакомые нам параметры, да? Называются правда немного по-другому, но суть та же.
+        msg = EmailMultiAlternatives (
+            subject=f'{Create_news.head_article}',
+            body=Create_news.text_post,  # это то же, что и message
+            from_email='rostovclimb@mail.ru',
+            to=emails_list,  # это то же, что и recipients_list
+        )
+        msg.attach_alternative ( html_content, "text/html" )  # добавляем html
+
+        msg.send ( )  # отсылаем
+
 
         return HttpResponseRedirect('/home/')
 
@@ -122,8 +138,6 @@ class Delete_news(DeleteView):
     model = Post
     template_name = 'delete.html'
     success_url = reverse_lazy('home')
-
-
 
 
 def Subscribes(request):

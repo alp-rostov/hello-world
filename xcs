@@ -1,0 +1,323 @@
+[33mcommit 7f427b9644250ca438e4ed79ea92d01e29aa15ae[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Sat Aug 20 23:49:37 2022 +0300
+
+    add cat
+
+[33mcommit 0035c0599b0f1aaa1c3f3c407794f907560f788a[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Fri Aug 19 20:34:01 2022 +0300
+
+    q
+
+[33mcommit 4d0d1f80b8804ce2e24a1a79dd2f44a5253fd57e[m
+Merge: 3d776d4 b65a35a
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Fri Aug 19 18:38:32 2022 +0300
+
+    Merge branch 'news'
+
+[33mcommit 3d776d49c5d88b7aef6af3cd5de2891a171d39d3[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Fri Aug 19 18:28:05 2022 +0300
+
+    sdsdsd
+
+[33mcommit b65a35a39ba636c0f9d7c84dd993f178a4c69453[m[33m ([m[1;32mnews[m[33m)[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Fri Aug 19 18:24:20 2022 +0300
+
+    www
+
+[33mcommit a0ad7602d040c5c129c8bb995322576dddf63418[m
+Merge: ec1c696 2c07ad7
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Tue Aug 16 01:58:42 2022 +0300
+
+    Merge branch 'news'
+
+[33mcommit ec1c69678da42d4f35f9fa28154c843887a096b3[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Tue Aug 16 01:55:22 2022 +0300
+
+    ss
+
+[33mcommit 2c07ad723be5fa94d7bcf8992b14bcee7a96353f[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Tue Aug 16 01:53:24 2022 +0300
+
+    e
+
+[33mcommit d583abff09e8554a9f6c75c0e44a677ef0c76390[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Thu Aug 11 23:36:51 2022 +0300
+
+    d
+
+[33mcommit 4272b4d6a0051b0a40c05721e3b702abac2c6244[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Wed Aug 10 22:34:16 2022 +0300
+
+    group
+
+[33mcommit d0ce488282459629dd182e32346c29784aef4cd2[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Mon Aug 8 18:26:56 2022 +0300
+
+    ss
+
+[33mcommit 8fca1d10655a4aefd50a6a1a1db19e05521d7c62[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Mon Aug 8 18:18:26 2022 +0300
+
+    new
+
+[33mcommit 9fbf668c2b83a3dea93df19ae2a735cf05225153[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Thu Aug 4 21:21:41 2022 +0300
+
+    x
+
+[33mcommit e88c9b609781447d563ea65c926343af0f376314[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Thu Aug 4 14:18:50 2022 +0300
+
+    add all
+
+[33mcommit 19b40deb920825dd31dd44b16876b9105dbb3b3c[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Mon Aug 1 22:41:51 2022 +0300
+
+    add date
+
+[33mcommit 47c3e5959d0e9460f2953ef2ec4d62d5cafee9c1[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Sun Jul 31 22:01:32 2022 +0300
+
+    add search
+
+[33mcommit 03c4e92ae53b7e542f31b008a43c5dfc3958ceba[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Mon Jul 25 01:28:16 2022 +0300
+
+    add navigatenews
+
+[33mcommit 38205ba807f3560fb3db442c1fc13f7d7d774584[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Sat Jul 23 23:07:30 2022 +0300
+
+    add
+
+[33mcommit 8b3e628e7a3c8d578011086169d082a28a42e59a[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Sat Jul 23 21:54:20 2022 +0300
+
+    add all
+
+[33mcommit ae9b252ef46a368ffab59823f92de5091ed67924[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Sat Jul 23 16:17:48 2022 +0300
+
+    add comment
+
+[33mcommit 2574ac563f559a0b4c91f7d5cbdf3b90595e853b[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Sat Jul 23 00:13:34 2022 +0300
+
+    add views listnews and news
+
+[33mcommit e64f8af87d9d790ac2985035a53af5b883bede08[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Fri Jul 22 20:49:57 2022 +0300
+
+    add css and templates
+
+[33mcommit 1b74af317bdb14628abf7d87c9e6e314f36b44f4[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Wed Jul 20 22:20:05 2022 +0300
+
+    add templates
+
+[33mcommit 134f1fa739f58a5b033b9a8dcd13be87d8f6c337[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Tue Jul 19 22:34:44 2022 +0300
+
+    обновлен файл с командами
+
+[33mcommit 412edab4b195d5cc478f560dabcb955430ffa392[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Sun Jul 17 22:57:11 2022 +0300
+
+    add txt
+
+[33mcommit 5d3d8cde03e1bedafffcb8d56a8931237e011fa2[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Sun Jul 17 17:12:16 2022 +0300
+
+    add
+
+[33mcommit cd0f57d163d728c602568a45b0f7b07d48c3b2c5[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Sun Jul 17 17:08:18 2022 +0300
+
+    add
+
+[33mcommit 3994b4630721f509d5bde3b7bb45fa07e9726d22[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Sat Jul 16 19:23:34 2022 +0300
+
+    add .txt
+
+[33mcommit 5fd52b43666da708708255fc450f6febe1795167[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Fri Jul 15 22:31:48 2022 +0300
+
+    ggg
+
+[33mcommit dcb80775dd029ce2fede19990cb2f2fe780f5e6d[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Thu Jul 14 23:21:38 2022 +0300
+
+    xxx
+
+[33mcommit 6321b31cb71be218b85a4b786ccdee8d559b0b2b[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Thu Jul 14 01:03:50 2022 +0300
+
+    q
+
+[33mcommit 3f8bb415982018a315f42c526cf77846f6fb57b5[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Wed Jul 13 23:14:26 2022 +0300
+
+    upd
+
+[33mcommit 126c2b7cffee05f0a78f8e2460b05eaac2e14e11[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Tue Jul 12 20:15:00 2022 +0300
+
+    www
+
+[33mcommit 2ac73594d6ccfed9c2d0f9a91d4e4109d8a319be[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Tue Jul 12 18:53:04 2022 +0300
+
+    models.py without migrate
+
+[33mcommit 4aa2b251181e19b0f6deb45ac57a26e3fd9a64dd[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Tue Jul 12 18:41:38 2022 +0300
+
+    models.py without migrate
+
+[33mcommit e32c45dc22a358cde032b11aee4a7f78f179ed34[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Tue Jul 12 18:35:28 2022 +0300
+
+    models.py without migrate
+
+[33mcommit 238ac25d283356b88362c31ece1e57f71f9a7aca[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Tue Jul 12 18:35:00 2022 +0300
+
+    models.py without migrate
+
+[33mcommit c326182460ab9be2cbffa4fed893c07c5c123897[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Tue Jul 12 18:29:06 2022 +0300
+
+    models.py without migrate
+
+[33mcommit c069eceec3e3838fc24ed3fead6eb66a28d40807[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Tue Jul 12 18:27:15 2022 +0300
+
+    models.py without migrate
+
+[33mcommit 4401711850cb95db81136d186baa7fc48a2c2c15[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Sun Jul 10 19:51:55 2022 +0300
+
+    None
+
+[33mcommit 9eb408489d254d9c3b38ca8fbb135263dee9f8e2[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Thu Jul 7 21:46:44 2022 +0300
+
+    None
+
+[33mcommit 42f87911f0d3ccef505ca6e0d60e1261042f8135[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Sat Jun 18 01:18:09 2022 +0300
+
+    add django
+
+[33mcommit 9e857fef0a078cdee379fc95898b92cc0bf9a74b[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Sat Jun 18 00:09:16 2022 +0300
+
+    add django
+
+[33mcommit 82b9b2d7f9142158ff4e54409cd2d7ce169ecf1b[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Sun Jun 12 14:36:39 2022 +0300
+
+    add django
+
+[33mcommit e1d5efe037114077f3cdb2d1a3d0454c2d015b63[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Sun Jun 12 14:35:37 2022 +0300
+
+    add django
+
+[33mcommit 09e13f6996a8f8885ff9ff9183b2b730ae43d0b5[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Thu Jun 9 21:27:15 2022 +0300
+
+    add TELEGRAM-bot
+
+[33mcommit e62db1e33d62d0602350201f63f89f68a1fc927d[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Thu Jun 9 21:25:01 2022 +0300
+
+    add TELEGRAM-bot
+
+[33mcommit 691585fba1ada971902b7847b65dd68802a53538[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Sat Jun 4 10:24:57 2022 +0300
+
+    add bot don-klimat
+
+[33mcommit 910453061d51f6051063fcafbf7aa957dc8335d2[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Thu May 19 00:50:12 2022 +0300
+
+    error correction
+
+[33mcommit 6de2a1f50793c395ea08040b5bbc079d25957400[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Wed May 18 23:24:01 2022 +0300
+
+    add
+
+[33mcommit 119d5c2221fb85790d6b5ce177335a9e1ff72644[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Wed May 18 23:23:32 2022 +0300
+
+    add test classes
+
+[33mcommit 2b516f1dbeb7f10f1958aadc2891bb0ff671f273[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Tue May 17 19:28:34 2022 +0300
+
+    add file sea_battle.py
+
+[33mcommit bf9a99963ffbb068d1256e4ca516158ec0b7560f[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Sun May 15 23:49:21 2022 +0300
+
+    add file sea_battle.py
+
+[33mcommit b33f285c61728cc1fc912e3273e83a52edf8c33e[m
+Author: Sergei <alp-rostov@mail.ru>
+Date:   Sat May 14 10:54:17 2

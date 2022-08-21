@@ -18,11 +18,9 @@ a {
 a:hover {
 	color:#000;
 }
-
 a img {
 	border:0;
 }
-
 input, textarea, select {
 	font-family:Arial, Helvetica, sans-serif;
 	font-size:12px;
@@ -161,32 +159,21 @@ textarea {
 }
 .post {
 }
-
 .post h2 {
 	color:#000;
 	font-size:30px;
 	font-style:italic;
 	line-height:35px;
-
 }
 .post h3 {
 	color:#000;
 	font-size:22px;
 	font-style:italic;
 	line-height:22px;
-	padding:10px 0 10px 0;
 }
-
-.post h4 {
-	color:#000;
-	font-size:16px;
-	line-height:12px;
-	padding:25px 0 1px 0;
-}
-
 .post p {
     font-size:17px;
-	padding-bottom:15px;
+	padding-top:10px;
 }
 
 .post p a {
@@ -197,8 +184,6 @@ textarea {
 	color:#ff0000;
 	text-decoration:none;
 }
-
-
 
 .tooltip span{
     border-radius: 5px 5px 5px 5px;
