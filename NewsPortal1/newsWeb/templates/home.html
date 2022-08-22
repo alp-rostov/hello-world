@@ -30,7 +30,7 @@
            {% if request.user.username and request.GET.category %}
            <br><a href="/home/subscribes?i={{request.GET.category}}"><b>Подписаться на новости раздела</b></a>
            {% endif%}
-
+            <br><br>
            {% for i in news %}
                <h4>{{ i.date|date:'d E Y' }}</h4>
 

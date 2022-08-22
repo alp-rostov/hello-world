@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, Category
+from .models import Post, Category,Author
 from .filters import news_filter
 from .forms import Create_news
 from django.urls import reverse_lazy
@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.http import HttpResponseRedirect, request
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
-from django.core.mail import EmailMultiAlternatives  # импортируем класс для создание объекта письма с html
+from django.core.mail import EmailMultiAlternatives, mail_managers  # импортируем класс для создание объекта письма с html
 from django.template.loader import render_to_string  # импортируем функцию, которая срендерит наш html в текст
 
 class NewsList(ListView):
@@ -88,41 +88,42 @@ class Create_n(PermissionRequiredMixin, CreateView):
 
 
     def form_valid(self, form):
-        b= self.request.POST.getlist('category') # id of categories from form Create_news
-
         Create_news = form.save ( commit=False )
-        if self.request.path=='/home/news/create':
-            Create_news.type_post = 'news'
+        current_day = datetime.now ( ).date ( )
+        count_ = Post.objects.filter ( id_author=Create_news.id_author, date__gte=current_day ).count ( )
+        if count_ < 3:
+            b= self.request.POST.getlist('category') # id of categories from form Create_news
+
+            if self.request.path=='/home/news/create':
+                Create_news.type_post = 'news'
+            else:
+                Create_news.type_post = 'article'
+            Create_news.save()
+            post1 = Create_news  # add id_post in category
+            for i in b:
+                cat1 = Category.objects.get ( pk=i)
+                post1.category.add ( cat1 )
+
+            emails=User.objects.filter ( category__id__in=b).values('email').distinct()
+            emails_list = [item['email'] for item in emails] # mail list for sent mail
+            html_content = render_to_string (
+                'appointment_created.html',
+                {
+                    'Create_news': Create_news,
+                }
+            )
+            # в конструкторе уже знакомые нам параметры, да? Называются правда немного по-другому, но суть та же.
+            msg = EmailMultiAlternatives (
+                subject=f'{Create_news.head_article}',
+                body=Create_news.text_post,  # это то же, что и message
+                from_email='rostovclimb@mail.ru',
+                to=emails_list,  # это то же, что и recipients_list
+            )
+            msg.attach_alternative ( html_content, "text/html" )  # добавляем html
+
+            msg.send ( )  # отсылаем
         else:
-            Create_news.type_post = 'article'
-        Create_news.save()
-
-        post1 = Create_news  # add id_post in category
-        for i in b:
-            cat1 = Category.objects.get ( pk=i)
-            post1.category.add ( cat1 )
-
-        emails=User.objects.filter ( category__id__in=b).values('email').distinct()
-        emails_list = [item['email'] for item in emails] # mail list for sent mail
-
-        html_content = render_to_string (
-            'appointment_created.html',
-            {
-                'Create_news': Create_news,
-            }
-        )
-        # в конструкторе уже знакомые нам параметры, да? Называются правда немного по-другому, но суть та же.
-        msg = EmailMultiAlternatives (
-            subject=f'{Create_news.head_article}',
-            body=Create_news.text_post,  # это то же, что и message
-            from_email='rostovclimb@mail.ru',
-            to=emails_list,  # это то же, что и recipients_list
-        )
-        msg.attach_alternative ( html_content, "text/html" )  # добавляем html
-
-        msg.send ( )  # отсылаем
-
-
+            print('слишком много информации!!!!!!!')
         return HttpResponseRedirect('/home/')
 
 class Create_edit(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
@@ -140,10 +141,13 @@ class Delete_news(DeleteView):
     success_url = reverse_lazy('home')
 
 
-def Subscribes(request):
+def Subscribes(request): #the function of subscribing to the news of the section
     user_ = User.objects.get(username=request.user)
     if user_ :
         cat1 = Category.objects.get ( pk=request.GET['i'] )
         post1 = user_
         cat1.subscribers.add ( post1 )
     return redirect('/home/')
+
+
+
