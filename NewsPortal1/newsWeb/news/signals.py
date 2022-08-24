@@ -17,7 +17,7 @@ def notify_managers_news(sender, instance, created, **kwargs):
 
     mail_managers (
         subject=subject,
-        message=instance.text_post,
+        message=f'{ instance.head_article } "http://127.0.0.1:8000/home/{ instance.id }"подробнее...'
     )
 
 
@@ -33,7 +33,6 @@ def week_news():
         print(list_of_posts)
         # создадим список, куда будем собирать почтовые адреса подписчиков
         subscribers_emails = []
-        # из списка всех пользователей
         print(category_)
         for user_ in User.objects.all ( ):
             user_mail=SubscribersUsers.objects.filter(id_category=category_.pk, id_user=user_.pk)
@@ -41,13 +40,14 @@ def week_news():
                 subscribers_emails.append ( user_.email )
         print(subscribers_emails)
 
-        html_content = render_to_string ( 'week_news.html',
-                                           {'posts': list_of_posts, 'category': category_.name} )
-        # формируем тело письма
-        msg = EmailMultiAlternatives (
-            subject=f'Новости за неделю',
-            from_email='rostovclimb@mail.ru',
-            to=subscribers_emails,
-        )
-        msg.attach_alternative ( html_content, "text/html" )
-        msg.send ( )  # отсылаем
+        if list_of_posts:
+            html_content = render_to_string ( 'week_news.html',
+                                              {'posts': list_of_posts, 'category': category_.name} )
+            # формируем тело письма
+            msg = EmailMultiAlternatives (
+                subject=f'Новости за неделю',
+                from_email='rostovclimb@mail.ru',
+                to=subscribers_emails,
+            )
+            msg.attach_alternative ( html_content, "text/html" )
+            msg.send ( )  # отсылаем
