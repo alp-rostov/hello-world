@@ -36,7 +36,7 @@ def week_news():
         # из списка всех пользователей
         print(category_)
         for user_ in User.objects.all ( ):
-            user_mail=SubscribersUsers.objects.filter(id_category=category_.pk, id_user=user_.pk).values('id_user__email').first()
+            user_mail=SubscribersUsers.objects.filter(id_category=category_.pk, id_user=user_.pk)
             if user_mail:
                 subscribers_emails.append ( user_.email )
         print(subscribers_emails)
