@@ -10,6 +10,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives, mail_managers  # импортируем класс для создание объекта письма с html
 from django.template.loader import render_to_string  # импортируем функцию, которая срендерит наш html в текст
+from .signals import week_news
 
 class NewsList(ListView):
     model = Post
