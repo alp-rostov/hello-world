@@ -20,7 +20,7 @@ def my_job():
     print('----------------')
 
 # функция, которая будет удалять неактуальные задачи
-def delete_old_job_executions(max_age=1604_800):
+def delete_old_job_executions(max_age=605_800):
     """This job deletes all apscheduler job executions older than `max_age` from the database."""
     DjangoJobExecution.objects.delete_old_job_executions ( max_age )
 
@@ -35,7 +35,7 @@ class Command ( BaseCommand ):
         # добавляем работу нашему задачнику
         scheduler.add_job (
             my_job,
-            trigger=CronTrigger ( second="*/604800" ), #в неделе 604800 секунд
+            trigger=CronTrigger ( week="*/1" ),
             # То же, что и интервал, но задача тригера таким образом более понятна django
             id="my_job",  # уникальный айди
             max_instances=1,

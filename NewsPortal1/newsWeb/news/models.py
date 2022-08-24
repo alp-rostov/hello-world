@@ -6,7 +6,7 @@ from django.conf import settings
 
 class Category(models.Model): #Table of categories
     name = models.CharField(max_length=255, unique=True)
-    subscribers  = models.ManyToManyField ( settings.AUTH_USER_MODEL, through='SubscribersUsers' )  # manytomany relation to the table "User"
+    subscribers  = models.ManyToManyField ( settings.AUTH_USER_MODEL, through='SubscribersUsers')  # manytomany relation to the table "User"
 
     def __str__(self):
         return f'{self.name}'

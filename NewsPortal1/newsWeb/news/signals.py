@@ -1,7 +1,7 @@
 import requests
 from django.db.models.signals import post_save
 from django.core.mail import mail_managers
-from .models import Post, Category, User
+from .models import Post, Category, User, SubscribersUsers
 from django.dispatch import receiver
 from datetime import date, timedelta
 from django.core.mail import EmailMultiAlternatives
@@ -28,24 +28,26 @@ def week_news():
 
     categories = Category.objects.all()
 
-    for category in categories:
-        list_of_posts = Post.objects.filter ( date__range=(start, finish), category=category.pk )
+    for category_ in categories:
+        list_of_posts = Post.objects.filter ( date__range=(start, finish), category=category_.pk )
+        print(list_of_posts)
         # создадим список, куда будем собирать почтовые адреса подписчиков
         subscribers_emails = []
         # из списка всех пользователей
-        for user in User.objects.all ( ):
-            user_mail=user.subscribers_set.get ( category=category)
-            subscribers_emails.append ( user_mail.email )
+        print(category_)
+        for user_ in User.objects.all ( ):
+            user_mail=SubscribersUsers.objects.filter(id_category=category_.pk, id_user=user_.pk).values('id_user__email').first()
+            if user_mail:
+                subscribers_emails.append ( user_.email )
+        print(subscribers_emails)
 
-            # укажем контекст в виде словаря, который будет рендерится в шаблоне week_posts.html
-            html_content = render_to_string ( 'NewsPaper/week_posts.html',
-                                              {'posts': list_of_posts, 'category': category.name} )
-
-            # формируем тело письма
-            msg = EmailMultiAlternatives (
-                subject=f'Новости за неделю',
-                from_email='rostovclimb@mail.ru',
-                to=subscribers_emails,
-            )
-            msg.attach_alternative ( html_content, "text/html" )
-            msg.send ( )  # отсылаем
+        html_content = render_to_string ( 'week_news.html',
+                                           {'posts': list_of_posts, 'category': category_.name} )
+        # формируем тело письма
+        msg = EmailMultiAlternatives (
+            subject=f'Новости за неделю',
+            from_email='rostovclimb@mail.ru',
+            to=subscribers_emails,
+        )
+        msg.attach_alternative ( html_content, "text/html" )
+        msg.send ( )  # отсылаем
