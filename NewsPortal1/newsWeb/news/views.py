@@ -63,7 +63,6 @@ class NewsFilter(ListView):
         # что и были переданы нам.
         # В ответе мы должны получить словарь.
         context = super().get_context_data(**kwargs)
-        # К словарю добавим текущую дату в ключ 'time_now'.
         context['filter'] = news_filter
         return context
 

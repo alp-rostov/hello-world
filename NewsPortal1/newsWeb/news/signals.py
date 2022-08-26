@@ -20,7 +20,6 @@ def notify_managers_news(sender, instance, created, **kwargs):
         message=f'{ instance.head_article } "http://127.0.0.1:8000/home/{ instance.id }"подробнее...'
     )
 
-
 def week_news():
 
     start = date.today ( ) - timedelta (7)

@@ -171,6 +171,17 @@ textarea {
 	font-style:italic;
 	line-height:22px;
 }
+
+.post a {
+    text-decoration:none;
+}
+
+.post .bold {
+	text-decoration:underline;
+	font-weight: bold;
+
+}
+
 .post p {
     font-size:17px;
 	padding-top:10px;

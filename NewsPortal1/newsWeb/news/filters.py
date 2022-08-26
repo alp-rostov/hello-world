@@ -1,3 +1,4 @@
+import requests
 from django_filters import FilterSet, DateFilter, CharFilter, ModelChoiceFilter
 from .models import Post, Author, Category
 from django import forms
