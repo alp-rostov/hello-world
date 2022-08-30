@@ -153,6 +153,15 @@ EMAIL_USE_SSL = True  # Яндекс использует ssl, подробне�
 MANAGERS = [('manager', 'alp-rostov@mail.ru'),]
 SERVER_EMAIL = 'rostovclimb@mail.ru'
 
+CELERY_BROKER_URL = 'redis://localhost:6379' # указывает на URL брокера сообщений (Redis). По умолчанию он находится на порту 6379.
+CELERY_RESULT_BACKEND = 'redis://localhost:6379' #указывает на хранилище результатов выполнения задач.
+CELERY_ACCEPT_CONTENT = ['application/json']   #CELERY_ACCEPT_CONTENT = ['application/json']   #
+CELERY_TASK_SERIALIZER = 'json'   #метод сериализации задач.
+CELERY_RESULT_SERIALIZER = 'json'    #метод сериализации результатов.
+
+
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -175,7 +184,6 @@ STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

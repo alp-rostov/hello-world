@@ -63,7 +63,8 @@ class NewsFilter(ListView):
         # что и были переданы нам.
         # В ответе мы должны получить словарь.
         context = super().get_context_data(**kwargs)
-        context['filter'] = news_filter
+        context['filter'] = news_filter( self.request.GET, self.queryset )
+
         return context
 
 class News(DetailView):
