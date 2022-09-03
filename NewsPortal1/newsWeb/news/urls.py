@@ -1,7 +1,7 @@
 from django.urls import path
 # Импортируем созданное нами представление
-from .views import NewsList, News, NewsFilter, Create_n, Create_edit, Delete_news, Subscribes
-
+from .views import NewsList, News, NewsFilter, Create_n, Create_edit, Delete_news, subscribes
+from django.views.decorators.cache import cache_page
 
 urlpatterns = [
    # path — означает путь.
@@ -13,9 +13,9 @@ urlpatterns = [
    # pk — это первичный ключ товара, который будет выводиться у нас в шаблон
    # int — указывает на то, что принимаются только целочисленные значения
    path ( '', NewsList.as_view ( ), name='home' ),
-   path ( '<int:pk>', News.as_view(), name='news'),
+   path ( '<int:pk>', cache_page(60*10)(News.as_view()), name='news'),
    path ( 'search', NewsFilter.as_view ( ), name='search' ),
-   path ( 'subscribes', Subscribes, name='subscribes' ),
+   path ( 'subscribes', subscribes, name='subscribes' ),
 
    path ( 'news/create', Create_n.as_view(), name='create_news'),
    path ( 'news/<int:pk>/update/', Create_edit.as_view ( ), name='edit' ),
