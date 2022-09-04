@@ -13,7 +13,7 @@ urlpatterns = [
    # pk — это первичный ключ товара, который будет выводиться у нас в шаблон
    # int — указывает на то, что принимаются только целочисленные значения
    path ( '', NewsList.as_view ( ), name='home' ),
-   path ( '<int:pk>', cache_page(60*10)(News.as_view()), name='news'),
+   path ( '<int:pk>', News.as_view(), name='news'),
    path ( 'search', NewsFilter.as_view ( ), name='search' ),
    path ( 'subscribes', subscribes, name='subscribes' ),
 

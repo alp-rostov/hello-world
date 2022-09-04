@@ -105,11 +105,12 @@ class Create_n(PermissionRequiredMixin, CreateView):
             Create_news.save()
 
             id_categories = self.request.POST.getlist('category')  # id of categories from form Create_news
+
             for i in id_categories:
                 cat1 = Category.objects.get(pk=i)
                 Create_news.category.add(cat1)
 
-            send_mail_news(Create_news, id_categories)
+            send_mail_news.apply_async([Create_news, id_categories], countdown = 25)   # вызов функции отправки почты
 
         else:
             print('Не более 3-х новостей в день')

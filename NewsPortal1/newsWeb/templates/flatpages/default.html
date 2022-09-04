@@ -1,22 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>
-  {% block title %}
-  {% endblock title %}
-</title>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-{% load static %}
+  <title>
+    {% block title %}
+    {% endblock title %}
+  </title>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  {% load static %}
+  {% load cache %}.
   <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css" media="all" />
-<link rel="stylesheet" href="{% static 'css/styles_form.css' %}" type="text/css" media="all" />
-
-<!--[if IE 6]><link rel="stylesheet" href="{% static 'css/ie6.css' %}" type="text/css" media="all" /><![endif]-->
-
+  <link rel="stylesheet" href="{% static 'css/styles_form.css' %}" type="text/css" media="all" />
+  <!--[if IE 6]><link rel="stylesheet" href="{% static 'css/ie6.css' %}" type="text/css" media="all" /><![endif]-->
 </head>
 
 <body>
 
 <!-- START PAGE SOURCE -->
+{% cache 3600 wellcome %}
 
 <div id="header">
   <div class="shell">
@@ -33,37 +33,38 @@
 
         </ul>
     </div>
-<!--    <div class="cl">&nbsp;</div>-->
   </div>
 </div>
-
 <div id="featured-content">
   <div class="shell">
-    <h2>Добро пожаловать! </h2>
+    <h2>Добро пожаловать!!!!! </h2>
 
   </div>
 </div>
+{% endcache %}
+
 
 <div align="center" >
     {% block search %}
-
     {% endblock search %}
 </div>
 
 <div>
   <div class="shell">
-        {% block content %}
+        {%  block content %}
         {% endblock content %}
   </div>
 </div>
 
 <!-- start  footer   -->
+{% cache 3600 footer %}
 <div class="footer">
   <div class="shell">
     <p class="lf">Контактная информация&copy; 2021 <a href="#">www.Infpo.ruu</a> - все авторские права защищены. Адрес: Россия, Ростов-на-Дону, Б-Садовая 85, т. 863-225-24-26</p>
-    <div style="clear:both;">Лицензия минисрества печати № 12132уу314-44</div>
+    <div style="clear:both;">Лицензия министерства печати № 12132уу314-44</div>
   </div>
 </div>
+{% endcache %}
 <!-- end  footer   -->
 
 <!-- END PAGE SOURCE -->

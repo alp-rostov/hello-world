@@ -1,12 +1,15 @@
-import celery
+from celery import shared_task
 from .models import User, Post
 from django.core.mail import EmailMultiAlternatives  # импортируем класс для создания объекта письма с html
 from django.template.loader import render_to_string  # импортируем функцию, которая срендерит наш html в текст
 
 
-@celery.shared_task
+@shared_task
 def send_mail_news(Create_news_: Post, id_categories_: list):
-
+    """"
+    Mail sending function
+    Using in views.py class Creat_n
+    """
     emails = User.objects.filter(category__id__in=id_categories_).values('email').distinct()
     emails_list = [item['email'] for item in emails]  # mail list for sent mail
     html_content = render_to_string(

@@ -9,6 +9,7 @@ from django.template.loader import render_to_string
 
 @receiver(post_save, sender=Post)  # создаём функцию-обработчик с параметрами под регистрацию сигнала
 def notify_managers_news(sender, instance, created, **kwargs):
+    """  the function of sending news when adding news  """
     if created:
         subject = f'Добавлена новость: {instance.head_article} от {instance.date.strftime ( "%d %m %Y" )}'
     else:
@@ -16,11 +17,15 @@ def notify_managers_news(sender, instance, created, **kwargs):
 
     mail_managers(
         subject=subject,
-        message=f'{ instance.head_article } "http://127.0.0.1:8000/home/{ instance.id }"подробнее...'
+        message=f'{ instance.head_article } http://127.0.0.1:8000/home/{ instance.id }  '
     )
 
 
 def week_news():
+    """
+    Function of sending news for the week
+    Using in runapscheduler.py
+    """
     start = date.today() - timedelta(7)
     finish = date.today()
     categories = Category.objects.all()
@@ -28,7 +33,6 @@ def week_news():
     for category_ in categories:
         list_of_posts = Post.objects.filter(date__range=(start, finish), category=category_.pk)
         print(list_of_posts)
-        # создадим список, куда будем собирать почтовые адреса подписчиков
         subscribers_emails = []
         print(category_)
         for user_ in User.objects.all():
