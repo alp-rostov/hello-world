@@ -5,4 +5,6 @@ I`am Sergey Gotsin</h1>.
 <ul>
 <li> NewsPortal1 - this is a training project of a news site.
 <li>sea_battle - The sea battle game is a training project from skillfactory.ru
+<li>bot - The telegram bot for currency exchange is a training project from skillfactory.ru
+<li> skill-projects - tic-tac-toe game - is a training project from skillfactory.ru
 </ul>
