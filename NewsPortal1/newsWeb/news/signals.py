@@ -1,10 +1,9 @@
 from django.db.models.signals import post_save
-from django.core.mail import mail_managers
+from django.template.loader import render_to_string
 from .models import Post, Category, User, SubscribersUsers
 from django.dispatch import receiver
 from datetime import date, timedelta
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives, mail_managers
 
 
 @receiver(post_save, sender=Post)  # создаём функцию-обработчик с параметрами под регистрацию сигнала

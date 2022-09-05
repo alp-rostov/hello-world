@@ -15,7 +15,7 @@ urlpatterns = [
    path ( '', NewsList.as_view ( ), name='home' ),
    path ( '<int:pk>', News.as_view(), name='news'),
    path ( 'search', NewsFilter.as_view ( ), name='search' ),
-   path ( 'subscribes', subscribes, name='subscribes' ),
+   path ( 'subscribes/<int:i>', subscribes, name='subscribes' ),
 
    path ( 'news/create', Create_n.as_view(), name='create_news'),
    path ( 'news/<int:pk>/update/', Create_edit.as_view ( ), name='edit' ),

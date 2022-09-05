@@ -12,6 +12,8 @@ from .tasks import send_mail_news
 
 
 class NewsList(ListView):
+    """news list
+    """
     model = Post
     ordering = '-date'
     template_name = 'home.html'
@@ -41,6 +43,7 @@ class NewsList(ListView):
 
 
 class NewsFilter(ListView):
+    """  find news  """
     model = Post
     template_name = 'search.html'
     context_object_name = 'news'
@@ -93,7 +96,6 @@ class Create_n(PermissionRequiredMixin, CreateView):
 
     def form_valid(self, form):
         Create_news = form.save(commit=False)
-        print(type(Create_news))
         current_day = datetime.now().date()
         count_ = Post.objects.filter(id_author=Create_news.id_author, date__gte=current_day).count()
 
@@ -110,7 +112,7 @@ class Create_n(PermissionRequiredMixin, CreateView):
                 cat1 = Category.objects.get(pk=i)
                 Create_news.category.add(cat1)
 
-            send_mail_news.apply_async([Create_news, id_categories], countdown = 25)   # вызов функции отправки почты
+            send_mail_news.delay(Create_news.id, id_categories)   # вызов функции отправки почты из tasks.py
 
         else:
             print('Не более 3-х новостей в день')
@@ -133,10 +135,14 @@ class Delete_news(DeleteView):
     success_url = reverse_lazy('home')
 
 
-def subscribes(request):  # the function of subscribing to the news of the section
+def subscribes(request,i):
+    """"
+    function of subscribing to the news of the section
+    using link in home.html
+    """
     user_ = User.objects.get(username=request.user)
     if user_:
-        cat1 = Category.objects.get(pk=request.GET['i'])
+        cat1 = Category.objects.get(pk=i)
         post1 = user_
         cat1.subscribers.add(post1)
     return redirect('/home/')

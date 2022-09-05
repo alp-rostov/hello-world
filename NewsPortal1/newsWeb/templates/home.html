@@ -33,7 +33,7 @@
            {% endfor %}
 
            {% if request.user.username and request.GET.category %}
-           <br><a href="/home/subscribes?i={{request.GET.category}}"><b>Подписаться на новости раздела</b></a>
+           <br><a href="/home/subscribes/{{request.GET.category}}"><b>Подписаться на новости раздела</b></a>
            {% endif%}
 
             <br><br>
