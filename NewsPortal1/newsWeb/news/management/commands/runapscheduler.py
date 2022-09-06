@@ -7,7 +7,7 @@ from apscheduler.triggers.cron import CronTrigger
 from django.core.management.base import BaseCommand
 from django_apscheduler.jobstores import DjangoJobStore
 from django_apscheduler.models import DjangoJobExecution
-from news.signals import week_news
+from news.tasks import week_news
 
 
 logger = logging.getLogger ( __name__ )
