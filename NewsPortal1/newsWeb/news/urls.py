@@ -1,6 +1,6 @@
 from django.urls import path
 # Импортируем созданное нами представление
-from .views import NewsList, News, NewsFilter, Create_n, Create_edit, Delete_news, subscribes
+from .views import NewsList, News, NewsFilter, Create_n, Create_edit, Delete_news, subscribes, like
 from django.views.decorators.cache import cache_page
 
 urlpatterns = [
@@ -16,6 +16,8 @@ urlpatterns = [
    path ( '<int:pk>', News.as_view(), name='news'),
    path ( 'search', NewsFilter.as_view ( ), name='search' ),
    path ( 'subscribes/<int:i>', subscribes, name='subscribes' ),
+   path ( 'like/<int:id_>', like, name='like' ),
+
 
    path ( 'news/create', Create_n.as_view(), name='create_news'),
    path ( 'news/<int:pk>/update/', Create_edit.as_view ( ), name='edit' ),

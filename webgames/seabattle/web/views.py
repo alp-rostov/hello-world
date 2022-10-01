@@ -13,6 +13,7 @@ class Head(TemplateView):
     def get(self, request, *args, **kwargs):
         self.g = Game ( )
         resp = super ( ).get ( request, *args, **kwargs )
+
         return resp
 
     def get_context_data(self, **kwargs):

@@ -6,7 +6,11 @@ from django.conf import settings
 
 
 class Category(models.Model):
-    """" Table of categories """
+    """ Table of categories
+
+    - name
+    - subscribers
+    """
     name = models.CharField(max_length=255, unique=True)
     subscribers = models.ManyToManyField(settings.AUTH_USER_MODEL, through='SubscribersUsers')  # manytomany relation to the table "User"
 
@@ -15,7 +19,8 @@ class Category(models.Model):
 
 
 class SubscribersUsers(models.Model):
-    """" Table for manytomany relation User and Category """
+    """" Table for manytomany relation User and Category
+    """
     id_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     id_category = models.ForeignKey('Category', on_delete=models.CASCADE)
 
@@ -27,28 +32,33 @@ class PostCategory(models.Model):
 
 
 class Comments(models.Model):
-    """ Table of comments for the post """
+    """ Table of comments for the post
+
+    - id_post
+    - text
+    - date
+    - sum_rank
+    - id_users
+    """
     id_post = models.ForeignKey('Post', on_delete=models.CASCADE)  # onetomany relation to the table "Post"
     text = models.TextField()  # text comment
     date = models.DateTimeField(auto_now_add = True)  # date of the comment will be added
     sum_rank = models.IntegerField(default=0)  # rank of comment
     id_users = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def like(self):
-        self.sum_rank = self.sum_rank+1
-        self.save()
-
-    def dislike(self):
-        if self.sum_rank > 0:  # the rating cannot be negative
-            self.sum_rank = self.sum_rank-1
-            self.save()
-
-
 POSITIONS = [('news', 'Новости'), ('article', 'Статьи')]
 
-
 class Post(models.Model):
-    """   Table for the posts  """
+    """   Table for the posts:
+
+    - head_article
+    - text_post
+    - date
+    - type_post
+    - sum_rank
+    - id_author
+    - category
+    """
     head_article = models.CharField(max_length=255)  # post`s name
     text_post = models.TextField()  # text
     date = models.DateTimeField(auto_now_add = True)  # date of the post will be added
@@ -57,24 +67,18 @@ class Post(models.Model):
     id_author = models.ForeignKey('Author', on_delete = models.CASCADE)  # onetomany relation to the table "Author"
     category = models.ManyToManyField('Category', through = PostCategory)  # manytomany relation to the table "Category"
 
-    def like(self):
-        self.sum_rank = self.sum_rank+1
-        self.save()
-
-    def dislike(self):
-        if self.sum_rank > 0:  # the rating cannot be negative
-            self.sum_rank = self.sum_rank-1
-            self.save()
-
-    def preview(self):
-        return self.text_post[0:124]
-
     def get_absolute_url(self):
         return reverse('news', args = [str(self.id)])
 
 
 class Author(models.Model):
-    """  Table for the author  """
+    """  Table for the author
+
+    - full_name
+    - e_mail
+    - rank
+    - id_users
+    """
     full_name = models.CharField(max_length = 255)
     e_mail = models.EmailField(max_length = 150, null = True)
     rank = models.IntegerField(default = 0)

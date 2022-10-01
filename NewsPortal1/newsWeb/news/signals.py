@@ -11,6 +11,7 @@ def notify_managers_news(sender, instance, created, **kwargs):
     """  the function of sending news when adding news  """
     if created:
         subject = f'Добавлена новость: {instance.head_article} от {instance.date.strftime ( "%d %m %Y" )}'
+
     else:
         subject = f'Изменения в новости: {instance.head_article} от {instance.date.strftime ( "%d %m %Y" )}'
 

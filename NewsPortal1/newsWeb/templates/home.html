@@ -38,14 +38,14 @@
             <br><br>
            {% for i in news %}
                <h4>{{ i.date|date:'d E Y' }}</h4>
-               <h3>{{ i.head_article| censor}}</h3>
+               <h3>{{ i.head_article| censor }}</h3>
                <p>
                <b>Категории:
                {% for v in i.category.all %}
                    {{ v.name }} |
                     {% endfor %}</b>
                <br><br>
-                {{ i.text_post|truncatewords:20| censor }}
+                {{ i.text_post|truncatewords:20| censor}}
                 <a href="{{ i.id }}">подробнее...</a> |
                 <a href="news/{{ i.id }}/update">редактировать...</a> |
                 <a href="news/{{ i.id }}/delete">удалить</a>
@@ -73,7 +73,7 @@
                     <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
                 {% endif %}
             {% endif %}
-        </p>
+            </p>
       </div>
     </div>
 

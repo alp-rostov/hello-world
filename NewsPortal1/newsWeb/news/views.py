@@ -13,7 +13,11 @@ from .tasks import send_mail_news
 
 class NewsList(ListView):
     """news list
-    """
+
+    - model = Post
+    - template_name = 'home.html'
+    - context_object_name = 'news'
+        """
     model = Post
     ordering = '-date'
     template_name = 'home.html'
@@ -27,9 +31,7 @@ class NewsList(ListView):
         # В ответе мы должны получить словарь.
         context = super().get_context_data(**kwargs)
         # К словарю добавим текущую дату в ключ 'time_now'.
-        context['time_now'] = datetime.utcnow()
         context = super().get_context_data(**kwargs)
-        context['get_author'] = not self.request.user.groups.filter(name='author').exists()
         context['get_category'] = Category.objects.all()
         return context
 
@@ -111,7 +113,7 @@ class Create_n(PermissionRequiredMixin, CreateView):
                 cat1 = Category.objects.get(pk=i)
                 Create_news.category.add(cat1)
 
-            send_mail_news.delay(Create_news.id, id_categories)   # вызов функции отправки почты из tasks.py
+            # send_mail_news.delay(Create_news.id, id_categories)   # вызов функции отправки почты из tasks.py
 
         else:
             print('Не более 3-х новостей в день')
@@ -145,3 +147,14 @@ def subscribes(request,i):
         post1 = user_
         cat1.subscribers.add(post1)
     return redirect('/home/')
+
+
+def like(request, id_):
+    """"
+    function -> rating +1
+    using link in new.html
+    """
+    post_ = Post.objects.get(id=id_)
+    post_.sum_rank += 1
+    post_.save()
+    return redirect(f'/home/{id_}')

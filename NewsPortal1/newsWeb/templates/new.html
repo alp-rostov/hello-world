@@ -18,15 +18,17 @@
                 <span><img src="/static/author/{{new.id_author.id }}.jpg" width="150" align="left" >
                 </span></a></i>
                 <br><br>
+                Рейтинг:{{ new.sum_rank }} <a href="like/{{new.id }}" title="рейтинг +1">Нравится статья</a>
+                <br><br>
+
                 <h3>Комментарии:</h3>
-                {% if comments %}
-                    {% for i in comments %}
-                        <p><b>{{ i.date }}</b> | <b>{{ i.id_users__username }}</b> | <b>рейтинг:
-                        {{ i.sum_rank }}</b> :<br> {{ i.text }} </p>
-                    {% endfor %}
-                {% else %}
-                    <p>нет комментариев</p>
-                {% endif %}
+                {% for i in comments %}
+                    <p><b>{{ i.date }}</b> | <b>{{ i.id_users__username }}</b> | <b>рейтинг:
+                    {{ i.sum_rank }}</b> :<br> {{ i.text }} </p>
+                {% empty %}
+                    <p>Нет комментариев</p>
+                {% endfor %}
+
         </p>
           <h3 align="center">
           {% if prev.id %}
@@ -36,9 +38,9 @@
           {% if next.id %}
             <a href="/home/{{next.id}}" title="Следующие новости"> ->> </a>
           {% endif %}
-          <h3>
+          </h3>
 
-       </div>
+      </div>
     </div>
 
 {% endblock content %}
