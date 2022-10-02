@@ -113,7 +113,10 @@ class Create_n(PermissionRequiredMixin, CreateView):
                 cat1 = Category.objects.get(pk=i)
                 Create_news.category.add(cat1)
 
-            # send_mail_news.delay(Create_news.id, id_categories)   # вызов функции отправки почты из tasks.py
+            try:
+                send_mail_news.delay ( Create_news.id, id_categories )  # вызов функции отправки почты из tasks.py
+            except Exception:                                           # доработать исключения
+                print ( "ошибка отправки сообщения на почту" )
 
         else:
             print('Не более 3-х новостей в день')
