@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from .tasks import send_mail_news
-
+import logging
 
 class NewsList(ListView):
     """news list
@@ -116,8 +116,8 @@ class Create_n(PermissionRequiredMixin, CreateView):
             try:
                 send_mail_news.delay ( Create_news.id, id_categories )  # вызов функции отправки почты из tasks.py
             except Exception:                                           # доработать исключения
-                print ( "ошибка отправки сообщения на почту" )
-
+                print( "ошибка отправки сообщения на почту" )
+                # logging.Logger.error("error - can`t sent email")
         else:
             print('Не более 3-х новостей в день')
         return HttpResponseRedirect('/home/')
