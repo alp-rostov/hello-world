@@ -24,4 +24,4 @@ def notify_managers_news(sender, instance, created, **kwargs):
 
         except Exception:
             print("ошибка отправки сообщения на почту")
-            # logging.Logger.error ( "error - can`t sent email" )
+            # logging.Logger.error('error - can`t sent email', exc_info=True )

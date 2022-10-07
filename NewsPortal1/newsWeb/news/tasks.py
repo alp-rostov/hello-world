@@ -22,7 +22,6 @@ def send_mail_news(pk_, id_categories_):
     )
     msg = EmailMultiAlternatives(
         subject=f'{post.head_article}',
-        # body=Create_news_.,
         from_email='rostovclimb@mail.ru',
         to=emails_list)
     msg.attach_alternative(html_content, "text/html")

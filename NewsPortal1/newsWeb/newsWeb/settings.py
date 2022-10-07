@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-etx^^#7*k1imc*+ulry%7g(%bx3l%z3k)4osswog!+vtf9chvk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -294,23 +294,23 @@ LOGGING = {
         },
         'django.request': {
             'handlers': ['errors', 'mail_admins'],
-            'propagate': False,
+            'propagate': True,
         },
         'django.server': {
             'handlers': ['errors', 'mail_admins'],
-            'propagate': False,
+            'propagate': True,
         },
         'django.template': {
             'handlers': ['errors'],
-            'propagate': False,
+            'propagate': True,
         },
         'django.db_backends': {
             'handlers': ['errors'],
-            'propagate': False,
+            'propagate': True,
         },
         'django.security': {
             'handlers': ['security'],
-            'propagate': False,
+            'propagate': True,
         },
 
     }
