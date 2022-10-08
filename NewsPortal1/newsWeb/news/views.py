@@ -1,8 +1,10 @@
 from datetime import datetime
+
+import requests
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, Category
+from .models import Post, Category, Comments
 from .filters import news_filter
-from .forms import Create_news
+from .forms import Create_news, Create_comments
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponseRedirect
@@ -82,9 +84,10 @@ class News(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['comments'] = context['new'].comments_set.all().values('text', 'id_users__username', 'date', 'sum_rank')
+        context['comments'] = context['new'].comments_set.all().order_by('-date').values('text', 'id_users__username', 'date', 'sum_rank')
         context['next'] = Post.objects.filter(id__gt=context['new'].id).order_by('id').values('id').first()
         context['prev'] = Post.objects.filter(id__lt=context['new'].id).order_by('-id').values('id').first()
+        context['form'] = Create_comments
         return context
 
 
@@ -143,7 +146,7 @@ class Delete_news(DeleteView):
 
 def subscribes(request,i):
     """"
-    function of subscribing to the news of the section
+    function for subscribing to the news of the section
     using link in home.html
     """
     user_ = User.objects.get(username=request.user)
@@ -151,7 +154,22 @@ def subscribes(request,i):
         cat1 = Category.objects.get(pk=i)
         post1 = user_
         cat1.subscribers.add(post1)
-    return redirect('/home/')
+    return redirect('')
+
+def create_comment(request):
+    """"
+        function for adding comments
+        using link in new.html
+    """
+    text_=request.POST.getlist('text')[0]
+    id_post= request.POST.getlist ( 'id_post' )[0]
+    id_users = request.POST.getlist ('id_users')[0]
+
+    post_ = Post.objects.get(pk=id_post )
+    user_ = User.objects.get(username=id_users)
+    Comments.objects.create ( id_post=post_, text=text_, id_users=user_ )
+
+    return HttpResponseRedirect (f'/home/{post_.pk}')
 
 
 def like(request, id_):

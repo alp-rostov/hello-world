@@ -1,6 +1,6 @@
 from django import forms
 from .models import Author
-from .models import Post, Category
+from .models import Post, Category, Comments
 
 
 class Create_news(forms.ModelForm):
@@ -33,4 +33,18 @@ class Create_news(forms.ModelForm):
             'text_post',
             'id_author',
             'category'
+        ]
+
+
+class Create_comments(forms.ModelForm):
+
+    text = forms.CharField(
+        label = 'Ваш комментарий',
+        widget = forms.Textarea
+    )
+
+    class Meta:
+        model = Comments
+        fields = [
+            'text'
         ]

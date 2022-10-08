@@ -22,12 +22,23 @@
                 <br><br>
 
                 <h3>Комментарии:</h3>
+
+                <form action="/home/create_comments" method="post">
+                <input type="hidden" value="{{new.id}}" name="id_post">
+                <input type="hidden" value="{{request.user }}" name="id_users">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Отправить комментарий" />
+                </form>
+                <hr>
+
                 {% for i in comments %}
                     <p><b>{{ i.date }}</b> | <b>{{ i.id_users__username }}</b> | <b>рейтинг:
                     {{ i.sum_rank }}</b> :<br> {{ i.text }} </p>
                 {% empty %}
                     <p>Нет комментариев</p>
                 {% endfor %}
+
 
         </p>
           <h3 align="center">
